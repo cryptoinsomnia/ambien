@@ -1,20 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from 'antd';
+import { pure, compose, withState, withHandlers } from 'recompose';
 
-class App extends Component {
-  render() {
-    return (
+const App = ({ isShowing, show, hide }) => (
+  <div>
+    <Button onClick={isShowing ? hide : show}> Toggle </Button>
+    {isShowing && 
       <div>
-        <header>
-          <h1 >Welcome to React</h1>
-        </header>
-        <p>
-          To get started, edit <code>src/App.js</code> and save to reload.
-          <Button> wut a button</Button>
-        </p>
+        YO
       </div>
-    );
-  }
-}
+    }
+  </div>
+)
 
-export default App;
+export default compose(
+  pure,
+  withState('isShowing', 'setShowing', false),
+  withHandlers({
+    show: ({ setShowing }) => () => setShowing(true),
+    hide: ({ setShowing }) => () => setShowing(false),
+  })
+)(App);
