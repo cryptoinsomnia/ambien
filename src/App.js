@@ -9,15 +9,11 @@ const App = ({ isShowing, show, hide }) => (
   </div>
 );
 
-const a = b => {
-  return 2 + 2;
-};
-a();
 export default compose(
   pure,
   withState('isShowing', 'setShowing', false),
   withHandlers({
     show: ({ setShowing }) => () => setShowing(true),
-    hide: ({ setShowing }) => () => setShowing(false)
+    hide: ({ setShowing }) => () => setShowing(false),
   })
 )(App);
