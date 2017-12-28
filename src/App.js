@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import { compose, pure, withStateHandlers } from 'recompose';
+import * as React from 'react';
+import { withStateHandlers } from 'recompose';
 import { Button } from 'antd';
 import type { HOC } from 'recompose';
 
@@ -13,19 +13,16 @@ type Props = {
 const App = ({ isShowing, show, hide }: Props) => (
   <div>
     <Button onClick={isShowing ? hide : show}>Toggle</Button>
-    {isShowing && <div>YO</div>}
+    {isShowing && <div>Showing</div>}
   </div>
 );
 
-const enhance: HOC<*, Props> = compose(
-  pure,
-  withStateHandlers(
-    { isShowing: false },
-    {
-      show: () => () => ({ isShowing: true }),
-      hide: () => () => ({ isShowing: false }),
-    }
-  )
+const enhance: HOC<*, Props> = withStateHandlers(
+  { isShowing: false },
+  {
+    show: () => () => ({ isShowing: true }),
+    hide: () => () => ({ isShowing: false }),
+  }
 );
 
 export default enhance(App);
