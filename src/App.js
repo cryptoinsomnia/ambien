@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
-import { pure, compose, withState, withHandlers } from 'recompose';
+import { compose, pure, withStateHandlers } from 'recompose';
 import { Button } from 'antd';
+import type { HOC } from 'recompose';
 
-type Props = {|
+type Props = {
   isShowing: boolean,
-  show: Function,
-  hide: Function
-|};
+  show: () => void,
+  hide: () => void,
+};
 
 const App = ({ isShowing, show, hide }: Props) => (
   <div>
@@ -16,11 +17,15 @@ const App = ({ isShowing, show, hide }: Props) => (
   </div>
 );
 
-export default compose(
+const enhance: HOC<*, Props> = compose(
   pure,
-  withState('isShowing', 'setShowing', false),
-  withHandlers({
-    show: ({ setShowing }) => () => setShowing(true),
-    hide: ({ setShowing }) => () => setShowing(false)
-  })
-)(App);
+  withStateHandlers(
+    { isShowing: false },
+    {
+      show: () => () => ({ isShowing: true }),
+      hide: () => () => ({ isShowing: false }),
+    }
+  )
+);
+
+export default enhance(App);
