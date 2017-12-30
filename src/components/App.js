@@ -1,21 +1,19 @@
 // @flow
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Layout } from 'antd';
 
+import Layout from './Layout';
 import Main from './Main';
 import Footer from './Footer';
 import Header from './Header';
-
-const { Content } = Layout;
 
 const App = () => (
   <Layout>
     <Header />
     <Router>
-      <Content>
+      <div>
         <Route exact path="/" component={Main} />
-      </Content>
+      </div>
     </Router>
     <Footer />
   </Layout>

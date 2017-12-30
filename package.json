@@ -4,10 +4,13 @@
   "private": true,
   "dependencies": {
     "antd": "^3.0.3",
+    "grid-styled": "^2.0.0-11",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "recompose": "^0.26.0"
+    "recompose": "^0.26.0",
+    "styled-components": "^2.4.0",
+    "styled-system": "^1.1.1"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.6.3",
@@ -21,7 +24,11 @@
     "react-scripts": "1.0.17"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": ["prettier", "eslint --fix", "git add"]
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier",
+      "eslint --fix",
+      "git add"
+    ]
   },
   "scripts": {
     "precommit": "lint-staged",
