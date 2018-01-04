@@ -6,7 +6,7 @@ import type { ComponentType } from 'react';
 import type { HOC } from 'recompose';
 
 import Logo from './Logo';
-import Container from './Container';
+import { Box } from './Layout';
 import Button from './Button';
 
 export type Item = 'top' | 'new' | 'trending';
@@ -39,7 +39,7 @@ const HeaderMenu = withItemSelection(
   )
 );
 const Header = () => (
-  <Container white>
+  <Box white>
     <Row type="flex" align="bottom">
       <Col span={6}>
         <Logo />
@@ -56,7 +56,7 @@ const Header = () => (
         </Button>
       </Col>
     </Row>
-  </Container>
+  </Box>
 );
 
 export default Header;

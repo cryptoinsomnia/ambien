@@ -1,6 +1,12 @@
 // @flow
 import React from 'react';
 
-const Footer = () => <div>Footer!</div>;
+import { Flex } from './Layout';
+
+const Footer = () => (
+  <Flex white direction="row" justify="center" p={3}>
+    <i> Copyright © 2018 CryptoInsomnia </i>
+  </Flex>
+);
 
 export default Footer;
