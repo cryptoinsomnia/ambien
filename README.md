@@ -17,6 +17,7 @@ The above will install the dependencies and start a development server.
 - [Ant Design](https://github.com/ant-design/ant-design)
 
 ## Main Development Dependencies
+- [Discharge](https://github.com/brandonweiss/discharge)
 - [Flow](https://flow.org/)
 - [Flow-Typed](https://github.com/flowtype/flow-typed)
 - [ESLint](https://github.com/eslint/eslint)

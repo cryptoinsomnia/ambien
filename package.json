@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.6.3",
+    "discharge": "^0.3.1",
     "flow-bin": "^0.61.0",
     "flow-typed": "^2.2.3",
     "husky": "^0.14.3",
@@ -24,11 +25,7 @@
     "react-scripts": "1.0.17"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier",
-      "eslint --fix",
-      "git add"
-    ]
+    "src/**/*.{js,jsx,json,css}": ["prettier", "eslint --fix", "git add"]
   },
   "scripts": {
     "precommit": "lint-staged",
@@ -37,6 +34,8 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "discharge deploy",
+    "distribute": "discharge distribute"
   }
 }
