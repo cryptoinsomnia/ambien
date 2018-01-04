@@ -10,8 +10,4 @@ const FakeLogo = styled.div`
 
 const Logo = () => <FakeLogo>CryptoInsomnia</FakeLogo>;
 
-export default styled(Logo)`
-  display: inline-block;
-  font-weight: 700;
-  font-size: 40px;
-`;
+export default Logo;
