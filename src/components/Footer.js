@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
 
-const Footer = () => <div>Footer</div>;
+const Footer = () => <div>Footer!</div>;
 
 export default Footer;
