@@ -11,10 +11,15 @@ type Grid = {|
   column: number,
 |};
 
+// More info to be added, and probably should be importing type from somewhere else.
+type User = {|
+  username: string,
+|};
+
 export type SubmissionInfo = {
   title: string,
   url: string,
-  submitter: string,
+  author: User,
   comments: Array<{}>,
 };
 
@@ -34,13 +39,13 @@ type Props = {|
 export const Submission = ({
   title,
   url,
-  submitter,
+  author,
   comments,
 }: SubmissionInfo) => (
   <Item actions={[<a key="comment">comment</a>, <a key="flag">flag</a>]}>
     <Item.Meta
       title={<a href={url}>{title}</a>}
-      description={`${submitter} | ${comments.length} comments`}
+      description={`${author.username} | ${comments.length} comments`}
     />
   </Item>
 );
