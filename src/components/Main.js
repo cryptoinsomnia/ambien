@@ -38,8 +38,7 @@ const AllPosts = gql`
 `;
 
 // graphql(Query) returns a Higher Order Component that injects the result of Query into the Component
-// to which it is applied.
-// Takes an options argument.
+// to which it is applied. Takes an options argument.
 const withData = graphql(AllPosts, {
   props: ({ data: { loading, allPosts } }) => ({
     isLoading: loading,
