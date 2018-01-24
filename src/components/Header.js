@@ -57,15 +57,6 @@ const HeaderMenu = ({ direction, selectedItem }: HeaderMenuProps) => (
         </MenuItem>
       </Box>
     )}
-    <MenuItem isSelected={selectedItem === 'top'} direction={direction}>
-      <Icon type="star-o" /> Top
-    </MenuItem>
-    <MenuItem isSelected={selectedItem === 'new'} direction={direction}>
-      <Icon type="hourglass" /> New
-    </MenuItem>
-    <MenuItem isSelected={selectedItem === 'trending'} direction={direction}>
-      <Icon type="rocket" /> Trending
-    </MenuItem>
   </Flex>
 );
 
@@ -74,9 +65,8 @@ HeaderMenu.defaultProps = {
 };
 
 const HambugerIcon = styled(Icon)`
-  font-size: 2.5em;
+  font-size: 2em;
   cursor: pointer;
-  margin-bottom: 7px;
 `;
 
 const withHamburgerMenuToggle = withState(
@@ -84,20 +74,30 @@ const withHamburgerMenuToggle = withState(
   'setMenuItemOpen',
   false
 );
+
 const Header = withHamburgerMenuToggle(
   ({ isMenuOpen, setMenuItemOpen }: HeaderProps) => (
-    <Box white>
-      <Row type="flex" align="bottom">
-        <Col lg={7} xs={21}>
+    <Box white boxShadow>
+      <Row type="flex" align="middle">
+        <Col
+          lg={{
+            span: 8,
+            offset: 3,
+          }}
+          xs={21}
+        >
           <Logo />
         </Col>
         <Col lg={0} xs={3} onClick={() => setMenuItemOpen(!isMenuOpen)}>
           <HambugerIcon type="bars" />
         </Col>
-        <Col lg={9} xs={0}>
-          <HeaderMenu selectedItem="new" />
-        </Col>
-        <Col lg={8} xs={0}>
+        <Col
+          lg={{
+            span: 8,
+            offset: 5,
+          }}
+          xs={0}
+        >
           <Button size="large" m={1} icon="plus-circle-o" type="primary">
             Post
           </Button>
