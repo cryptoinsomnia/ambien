@@ -12,6 +12,7 @@ export const colors = {
 };
 
 export const boxShadow = '0 2px 8px #e8e8e8';
+export const borderRadius = '3px';
 
 // The same values ant uses
 const sizes = {

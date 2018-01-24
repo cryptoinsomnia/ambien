@@ -21,6 +21,7 @@ The above will install the dependencies and start a development server.
 * [Recompose](https://github.com/acdlite/recompose)
 * [Ant Design](https://github.com/ant-design/ant-design)
 * [Styled Components](https://github.com/styled-components/styled-components)
+* [Grid Styles](https://github.com/jxnblk/grid-styled)
 
 ## Main Development Dependencies
 

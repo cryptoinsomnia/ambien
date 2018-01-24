@@ -4,20 +4,19 @@ import { graphql } from 'react-apollo';
 import { compose, branch, renderComponent } from 'recompose';
 import gql from 'graphql-tag';
 
-import List, { type SubmissionInfo } from './List';
-import { Box } from './Layout';
-
-type Props = {|
-  submissions: Array<SubmissionInfo>,
-|};
+import { Flex, Box, Island } from './Layout';
 
 // Stateless component for loading state (to avoid if-statement within Main component)
-const MainLoading = () => <Box mx={2}> ...Loading </Box>;
+const LoadingMain = () => <Box mx={2}> ...Loading </Box>;
 
-const Main = ({ submissions }: Props) => (
-  <Box mx={2}>
-    <List dataSource={submissions} />
-  </Box>
+const Main = () => (
+  <Flex justify="center">
+    <Island my={3}>
+      <div> 1. Thing </div>
+      <div> 2. Thing </div>
+      <div> 3. Thing </div>
+    </Island>
+  </Flex>
 );
 
 // The AllPosts graphql query
@@ -46,10 +45,10 @@ const withData = graphql(AllPosts, {
   }),
 });
 
-// Display the MainLoading component when isLoading is true.
+// Display the LoadingMain component when isLoading is true.
 const displayLoadingState = branch(
   ({ isLoading }) => isLoading,
-  renderComponent(MainLoading)
+  renderComponent(LoadingMain)
 );
 
 export default compose(withData, displayLoadingState)(Main);
