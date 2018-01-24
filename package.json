@@ -26,6 +26,7 @@
     "lint-staged": "^6.0.0",
     "prettier": "^1.9.2",
     "prettier-eslint": "^8.6.2",
+    "react-app-rewire-less": "^2.1.0",
     "react-app-rewired": "^1.4.0",
     "react-scripts": "1.0.17"
   },
