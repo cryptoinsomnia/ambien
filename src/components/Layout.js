@@ -13,6 +13,9 @@ export default styled(Layout)``;
 export const Box = styled(GridBox)`
   ${props => props.white && `background: ${colors.whiteBackground}`};
   ${props => props.boxShadow && `box-shadow: ${boxShadow}`};
+  ${props => props.maxWidth && `max-width: ${props.maxWidth}`};
+  ${props =>
+    props.borderBottom && `border-bottom: 1px solid ${colors.lightGrey}`};
 `;
 
 export const Island = styled.section`
@@ -21,6 +24,7 @@ export const Island = styled.section`
   border-radius: ${borderRadius};
   padding: ${modularScale(2)};
   ${space};
+  ${props => props.maxWidth && `max-width: ${props.maxWidth}`};
 `;
 
 export const Flex = Box.withComponent(GridFlex);
