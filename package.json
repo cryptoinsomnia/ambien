@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.0.3",
     "apollo-client-preset": "^1.0.6",
+    "date-fns": "^1.29.0",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
     "grid-styled": "^2.0.0-11",
@@ -14,6 +15,7 @@
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "recompose": "^0.26.0",
+    "redux": "^3.7.2",
     "styled-components": "^2.4.0",
     "styled-system": "^1.1.1"
   },
@@ -31,14 +33,10 @@
     "react-scripts": "1.0.17"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier",
-      "eslint --fix",
-      "git add"
-    ]
+    "src/**/*.{js,jsx,json,css}": ["prettier", "eslint --fix", "git add"]
   },
   "scripts": {
-    "precommit": "lint-staged",
+    "precommit": "lint-staged && flow",
     "flow": "flow",
     "flow-typed": "flow-typed",
     "start": "react-app-rewired start",
