@@ -6,6 +6,7 @@ import { Box as GridBox, Flex as GridFlex } from 'grid-styled';
 import { space } from 'styled-system';
 import { Layout } from 'antd';
 
+import { media } from '../util/style';
 import { colors, boxShadow, borderRadius } from '../util/style';
 
 export default styled(Layout)``;
@@ -22,9 +23,12 @@ export const Island = styled.section`
   background: ${colors.whiteBackground};
   box-shadow: ${boxShadow};
   border-radius: ${borderRadius};
-  padding: ${modularScale(2)};
   ${space};
   ${props => props.maxWidth && `max-width: ${props.maxWidth}`};
+  padding: ${modularScale(2)};
+  ${media.xs`
+    padding: ${modularScale(0)};
+  `};
 `;
 
 export const Flex = Box.withComponent(GridFlex);
