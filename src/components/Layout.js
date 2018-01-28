@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import { modularScale } from 'polished';
 import { Box as GridBox, Flex as GridFlex } from 'grid-styled';
-import { space } from 'styled-system';
+import { space, width } from 'styled-system';
 import { Layout } from 'antd';
 
 import { media } from '../util/style';
@@ -24,6 +24,7 @@ export const Island = styled.section`
   box-shadow: ${boxShadow};
   border-radius: ${borderRadius};
   ${space};
+  ${width};
   ${props => props.maxWidth && `max-width: ${props.maxWidth}`};
   padding: ${modularScale(2)};
   ${media.xs`
