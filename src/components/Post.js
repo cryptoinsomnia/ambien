@@ -1,13 +1,16 @@
 // @flow
 import React from 'react';
-import { Tag, Row, Col } from 'antd';
+import { Tag, Row, Col, Icon } from 'antd';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
+import styled from 'styled-components';
 
 import { Box } from './Layout';
 import Text from './Text';
 import UserAvatar from './UserAvatar';
 import Voter from './Voter';
+import Link from './Link';
 import { type FeedPost } from '../types/api';
+import { colors } from '../util/style';
 
 // The props to a Post are everything in the FeedPost API object
 // and the ranking (order it appears in the list).
@@ -15,9 +18,14 @@ export type Props = {
   rank: number,
 } & FeedPost;
 
+const LinkIcon = styled(Icon)`
+  color: ${colors.black};
+  margin-left: 5px;
+`;
+
 const Post = ({
   rank,
-  // url,
+  url,
   title,
   createdAt,
   author,
@@ -34,7 +42,14 @@ const Post = ({
     <Col lg={23} xs={20}>
       <Row type="flex" wrap justify="space-between">
         <Col xs={24} lg={19}>
-          <Text size="large" bold>{`${rank}. ${title}`}</Text>
+          <Text size="large" bold>
+            {`${rank}. ${title}`}
+            {url && (
+              <Link href={url} target="_blank">
+                <LinkIcon type="link" />
+              </Link>
+            )}
+          </Text>
         </Col>
         <Col lg={5}>
           <Row type="flex" justify="end">
@@ -47,7 +62,7 @@ const Post = ({
         </Col>
       </Row>
       <Row type="flex" wrap justify="space-between">
-        <Text>{comments.length} comments</Text>
+        <Link>{comments.length} comments</Link>
         <Box>
           {tags.map(tag => <Tag key={tag.name}>{tag.displayName}</Tag>)}
         </Box>
