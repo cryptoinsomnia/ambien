@@ -11,7 +11,7 @@ import { type Size } from '../types/style';
 
 export type Props = {
   size: Size,
-  children: Node,
+  children?: Node,
   ...SmallUser,
 };
 

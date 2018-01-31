@@ -7,6 +7,7 @@ import Layout from './Layout';
 import Main from './Main';
 import Footer from './Footer';
 import Header from './Header';
+import StrongLad from './StrongLad';
 import client from '../util/client';
 
 const App = () => (
@@ -16,6 +17,7 @@ const App = () => (
       <Router>
         <div>
           <Route exact path="/" component={Main} />
+          <Route path="/stronglads" component={StrongLad} />
         </div>
       </Router>
       <Footer />
