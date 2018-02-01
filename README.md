@@ -33,6 +33,6 @@ The above will install the dependencies and start a development server.
 
 ## Development Environment
 
-Linting, formatting and type checking work regardless of development environment. Code is linted and formatted via a pre-commit hook. The typecheck is not part of the pre-commit hook and should be run manually via `npm run flow`.
+Linting, formatting and type checking work regardless of development environment. Code is linted, formatted and typechecked via a pre-commit hook.
 
 To set up Visual Studio Code to integrate with these development tools see [this article](https://hackernoon.com/configure-eslint-prettier-and-flow-in-vs-code-for-react-development-c9d95db07213) to see what VSC extensions to install and what workspace settings to use.
