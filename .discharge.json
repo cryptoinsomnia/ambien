@@ -1,13 +1,11 @@
 {
-  "domain": "cryptoinsomnia.com",
-  "build_command": "npm run build",
+  "domain": "app.cryptoinsomnia.com",
+  "build_command": "yarn run build",
   "upload_directory": "build",
   "index_key": "index.html",
   "error_key": "index.html",
   "trailing_slashes": false,
   "cache": 3600,
   "aws_profile": "default",
-  "aws_region": "us-west-1",
-  "dns_configured": true,
-  "cdn": true
+  "aws_region": "us-west-1"
 }
