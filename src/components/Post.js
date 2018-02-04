@@ -5,7 +5,7 @@ import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import styled from 'styled-components';
 
 import { Box } from './Layout';
-import Text from './Text';
+import { Text, RouterText } from './Text';
 import UserAvatar from './UserAvatar';
 import Voter from './Voter';
 import Link from './Link';
@@ -43,12 +43,15 @@ const Post = ({
       <Row type="flex" justify="space-between">
         <Col xs={24} lg={19}>
           <Text size="large" bold>
-            {`${rank}. ${title}`}
-            {url && (
-              <Link href={url} target="_blank">
-                <LinkIcon type="link" />
-              </Link>
-            )}
+          {`${rank}. `}
+          <RouterText to="post" size="large" bold>
+            {`${title}`}
+          </RouterText>
+          {url && (
+            <Link href={url} target="_blank">
+              <LinkIcon type="link" />
+            </Link>
+          )}
           </Text>
         </Col>
         <Col lg={5}>

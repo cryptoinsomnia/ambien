@@ -4,7 +4,7 @@ import React, { type Node } from 'react';
 import { Avatar } from 'antd';
 
 import { Flex, Box } from './Layout';
-import Text from './Text';
+import { Text } from './Text';
 import { colors } from '../util/style';
 import { type SmallUser } from '../types/api';
 import { type Size } from '../types/style';
