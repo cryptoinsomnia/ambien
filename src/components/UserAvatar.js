@@ -3,7 +3,7 @@
 import React, { type Node } from 'react';
 import { Avatar } from 'antd';
 
-import { Flex } from './Layout';
+import { Flex, Box } from './Layout';
 import Text from './Text';
 import { colors } from '../util/style';
 import { type SmallUser } from '../types/api';
@@ -29,9 +29,11 @@ const UserAvatar = ({
       size={size}
       style={{ backgroundColor: colors.blue }}
     />
-    <Text ml="3px" size={size}>
-      {username}({karma})
-    </Text>
+    <Box ml="3px">
+      <Text size={size}>
+        {username}({karma})
+      </Text>
+    </Box>
     {children}
   </Flex>
 );

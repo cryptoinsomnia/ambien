@@ -30,7 +30,26 @@ $ nvm use lts/carbon
 ### `$ yarn run precommit` 
 This is what is run before a commit. There should be no reason to run it manually. It will lint staged files and type-check the entire project using flow.
 
-### `$ yarn run`
+### `$ yarn run flow`
+Will typecheck the files in the project.
+
+### `$ yarn run flow-typed`
+Flow-type is a central repository of flow-types for popular 3rd party libraries. Use this to install those type definitions (if the dependency does not already provide them).
+
+### `$ yarn run start`
+Start the development server. 
+
+### `$ yarn run build`
+Build the project with webpack and update the `build/` folder with the static assets. No need to call this unless you want to debug  as the deploy command calls this automatically.
+
+### `$ yarn run eject`
+Don't run this. It will eject us from the [Create React App](https://github.com/facebookincubator/create-react-app) setup.
+
+### `$ yarn run deploy`
+Will the deploy the app to S3/Cloudfront using [discharge](https://github.com/brandonweiss/discharge).
+
+### `$ yarn run discharge`
+Also part of discharge, but only run once to set up Cloudfront and certificates. 
 
 ## Main Prod Dependencies
 
@@ -51,7 +70,7 @@ This is what is run before a commit. There should be no reason to run it manuall
 
 Linting, formatting and type checking work regardless of development environment. Code is linted, formatted and typechecked via a pre-commit hook.
 
-To set up Visual Studio Code to integrate with these development tools see [this article](https://hackernoon.com/configure-eslint-prettier-and-flow-in-vs-code-for-react-development-c9d95db07213) to see **what VSC extensions to install and what workspace settings to use. The js dependencies are already installed via `yarn install`**
+To set up Visual Studio Code to integrate with these development tools see [this article](https://hackernoon.com/configure-eslint-prettier-and-flow-in-vs-code-for-react-development-c9d95db07213) to see **what VSC extensions to install and what workspace settings to use. The js dependencies are already installed via `yarn install`**.
 
 For reference here are some working workspace settings.
 ```json
