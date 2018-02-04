@@ -34,7 +34,11 @@
     "react-scripts": "1.0.17"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": ["prettier", "eslint --fix", "git add"]
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier",
+      "eslint --fix",
+      "git add"
+    ]
   },
   "scripts": {
     "precommit": "lint-staged && flow",
