@@ -54,9 +54,11 @@ const Post = ({
         <Col lg={5}>
           <Row type="flex" justify="end">
             <UserAvatar {...author} size="small">
-              <Text italic size="small" ml={1}>
-                {`${distanceInWordsToNow(new Date(createdAt))} ago`}
-              </Text>
+              <Box ml={1}>
+                <Text italic size="small">
+                  {`${distanceInWordsToNow(new Date(createdAt))} ago`}
+                </Text>
+              </Box>
             </UserAvatar>
           </Row>
         </Col>
