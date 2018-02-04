@@ -2,7 +2,7 @@
 // File for visual primitives components.
 import styled from 'styled-components';
 import { modularScale } from 'polished';
-import { Box as GridBox, Flex as GridFlex } from 'grid-styled';
+import { Flex as GridFlex } from 'grid-styled';
 import { space, width } from 'styled-system';
 import { Layout } from 'antd';
 
@@ -11,7 +11,9 @@ import { colors, boxShadow, borderRadius } from '../util/style';
 
 export default styled(Layout)``;
 
-export const Box = styled(GridBox)`
+export const Box = styled.div`
+  ${space};
+  ${width};
   ${props => props.white && `background: ${colors.whiteBackground}`};
   ${props => props.boxShadow && `box-shadow: ${boxShadow}`};
   ${props => props.maxWidth && `max-width: ${props.maxWidth}`};
@@ -32,4 +34,4 @@ export const Island = styled.section`
   `};
 `;
 
-export const Flex = Box.withComponent(GridFlex);
+export const Flex = GridFlex.withComponent(Box);

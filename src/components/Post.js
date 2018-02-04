@@ -40,7 +40,7 @@ const Post = ({
       </Row>
     </Col>
     <Col lg={23} xs={20}>
-      <Row type="flex" wrap justify="space-between">
+      <Row type="flex" justify="space-between">
         <Col xs={24} lg={19}>
           <Text size="large" bold>
             {`${rank}. ${title}`}
@@ -54,14 +54,16 @@ const Post = ({
         <Col lg={5}>
           <Row type="flex" justify="end">
             <UserAvatar {...author} size="small">
-              <Text italic size="small" ml={1}>
-                {`${distanceInWordsToNow(new Date(createdAt))} ago`}
-              </Text>
+              <Box ml={1}>
+                <Text italic size="small">
+                  {`${distanceInWordsToNow(new Date(createdAt))} ago`}
+                </Text>
+              </Box>
             </UserAvatar>
           </Row>
         </Col>
       </Row>
-      <Row type="flex" wrap justify="space-between">
+      <Row type="flex" justify="space-between">
         <Link>{comments.length} comments</Link>
         <Box>
           {tags.map(tag => <Tag key={tag.name}>{tag.displayName}</Tag>)}
