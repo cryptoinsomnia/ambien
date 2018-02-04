@@ -40,7 +40,7 @@ const Post = ({
       </Row>
     </Col>
     <Col lg={23} xs={20}>
-      <Row type="flex" wrap justify="space-between">
+      <Row type="flex" justify="space-between">
         <Col xs={24} lg={19}>
           <Text size="large" bold>
             {`${rank}. ${title}`}
@@ -61,7 +61,7 @@ const Post = ({
           </Row>
         </Col>
       </Row>
-      <Row type="flex" wrap justify="space-between">
+      <Row type="flex" justify="space-between">
         <Link>{comments.length} comments</Link>
         <Box>
           {tags.map(tag => <Tag key={tag.name}>{tag.displayName}</Tag>)}
