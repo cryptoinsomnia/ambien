@@ -18,7 +18,7 @@ const App = () => (
         <div>
           <Route exact path="/" component={Main} />
           <Route path="/post/:id" render={(id) => (
-            <PostDetails id={id} />
+            <PostDetails id={id.match.params.id} />
           )}/>
         </div>
       </Router>

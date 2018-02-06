@@ -1,15 +1,61 @@
 // @flow
 import React from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import { Row } from 'antd';
+import { compose } from 'recompose';
+import { Spin } from 'antd';
+
+import { Text } from './Text';
+import { type FeedPost } from '../types/api';
 
 export type Props = {
-  id: Object,
+  id: string,
+  post: FeedPost,
+  isLoading: boolean,
 };
 
-const PostDetails = ({ id }: Props) => (
+const PostDetails = ({ post, isLoading }: Props) => (
   <Row type="flex" align="middle">
-    This will be the post details page for the post with an id of {id.match.params.id}
+    {isLoading ? (
+      <Spin size="large" />
+    ) : (
+      <Text>hello world</Text>
+    )}    
   </Row>
 );
 
-export default PostDetails;
+const Post = gql`
+  query Post($id: ID!) {
+    Post(id: $id) {
+      id
+      title
+      url
+      createdAt
+      author {
+        username
+      }
+      comments {
+        id
+      }
+      votes {
+        id
+      }
+    }
+  }
+`;
+
+// graphql(Query) returns a Higher Order Component that injects the result of Query into the Component
+// to which it is applied. Takes an options argument.
+const withData = graphql(Post, {
+  options: ({ id }) => ({
+    id: id,
+    notifyOnNetworkStatusChange: true,
+  }),
+  props: ({ data: { loading, Post } }) => ({
+    isLoading: loading,
+    post: Post,
+  }),
+});
+
+export default compose(withData)(PostDetails);
