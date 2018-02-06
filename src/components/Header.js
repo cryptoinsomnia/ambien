@@ -86,7 +86,7 @@ const Header = withHamburgerMenuToggle(
           }}
           xs={21}
         >
-          <Logo />
+          <Logo to="/" />
         </Col>
         <Col lg={0} xs={3} onClick={() => setMenuItemOpen(!isMenuOpen)}>
           <HambugerIcon type="bars" />

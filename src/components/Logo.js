@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Flex } from './Layout';
 
+import Link from './Link';
 import { colors, media } from '../util/style';
 
 const LogoText = styled.div`
@@ -41,12 +42,27 @@ LogoIcon.defaultProps = {
   scale: 0.4,
 };
 
+type Props = {
+  to: string,
+}
+
 // Note: this is responsive for Navbar.
 // Might require refactor if used in multiple places.
-const Logo = () => (
-  <Flex align="center" justify="center">
+const LogoCore = 
+  <Flex align="center" justify="center" >
     <LogoIcon />
     <LogoText>CryptoInsomnia</LogoText>
+  </Flex>;
+
+const Logo = ({ to }: Props) => (
+  <Flex>
+    {to != null ? (
+      <Link href={to} underlineTextDecoration={false} >
+        {LogoCore}
+      </Link>
+    ) : (
+      {LogoCore}
+    )}
   </Flex>
 );
 
