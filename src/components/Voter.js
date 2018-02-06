@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Icon } from 'antd';
 
 import { Flex } from './Layout';
-import Text from './Text';
+import { Text } from './Text';
 
 export type Props = {|
   count: number,

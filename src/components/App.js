@@ -5,6 +5,7 @@ import { ApolloProvider } from 'react-apollo';
 
 import Layout from './Layout';
 import Main from './Main';
+import PostDetails from './PostDetails';
 import Footer from './Footer';
 import Header from './Header';
 import client from '../util/client';
@@ -16,6 +17,9 @@ const App = () => (
         <div>
           <Header />
           <Route exact path="/" component={Main} />
+          <Route path="/post/:id" render={(id) => (
+            <PostDetails id={id.match.params.id} />
+          )}/>
           <Footer />
         </div>
       </Router>
