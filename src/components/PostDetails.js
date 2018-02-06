@@ -20,7 +20,12 @@ const PostDetails = ({ post, isLoading }: Props) => (
     {isLoading ? (
       <Spin size="large" />
     ) : (
-      <Text>hello world</Text>
+      <div>
+        <Text> | id: {post.id} \n</Text>
+        <Text> | title: {post.title}</Text>
+        <Text> | url: {post.url}</Text>
+        <Text> | createdAt: {post.createdAt}</Text>
+      </div>
     )}    
   </Row>
 );
