@@ -3,10 +3,17 @@ import { Link as RouterLink } from 'react-router-dom';
 import { branch, renderComponent } from 'recompose';
 
 const A = styled.a`
-  &:hover {
-    text-decoration: underline;
-  }
+  ${props => props.underlineTextDecoration && 
+    `&:hover {
+      text-decoration: underline;
+    }`
+  };
 `;
+
+A.defaultProps = {
+  underlineTextDecoration: true,
+};
+
 const RouterA = A.withComponent(RouterLink);
 
 // Use react-router-dom link if `to` prop is present.

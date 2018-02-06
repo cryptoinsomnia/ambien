@@ -13,16 +13,16 @@ import client from '../util/client';
 const App = () => (
   <ApolloProvider client={client}>
     <Layout>
-      <Header />
       <Router>
         <div>
+          <Header />
           <Route exact path="/" component={Main} />
           <Route path="/post/:id" render={(id) => (
             <PostDetails id={id.match.params.id} />
           )}/>
+          <Footer />
         </div>
       </Router>
-      <Footer />
     </Layout>
   </ApolloProvider>
 );
