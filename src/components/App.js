@@ -17,7 +17,9 @@ const App = () => (
       <Router>
         <div>
           <Route exact path="/" component={Main} />
-          <Route exact path="/post" component={PostDetails} />
+          <Route path="/post/:id" render={(id) => (
+            <PostDetails id={id} />
+          )}/>
         </div>
       </Router>
       <Footer />

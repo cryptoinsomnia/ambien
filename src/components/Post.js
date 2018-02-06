@@ -25,6 +25,7 @@ const LinkIcon = styled(Icon)`
 
 const Post = ({
   rank,
+  id,
   url,
   title,
   createdAt,
@@ -44,7 +45,7 @@ const Post = ({
         <Col xs={24} lg={19}>
           <Text size="large" bold>
           {`${rank}. `}
-          <RouterText to="post" size="large" bold>
+          <RouterText id={id} to={'post/' + id} size="large" bold>
             {`${title}`}
           </RouterText>
           {url && (
