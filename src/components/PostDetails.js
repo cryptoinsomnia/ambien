@@ -10,6 +10,7 @@ import { Text } from './Text';
 import { type FeedPost } from '../types/api';
 
 export type Props = {
+  id: string,
   post: FeedPost,
   isLoading: boolean,
 };
@@ -20,7 +21,7 @@ const PostDetails = ({ post, isLoading }: Props) => (
       <Spin size="large" />
     ) : (
       <div>
-        <Text> | id: {post.id} \n</Text>
+        <Text> | id: {post.id} </Text>
         <Text> | title: {post.title}</Text>
         <Text> | url: {post.url}</Text>
         <Text> | createdAt: {post.createdAt}</Text>
