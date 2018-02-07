@@ -10,7 +10,6 @@ import { Text } from './Text';
 import { type FeedPost } from '../types/api';
 
 export type Props = {
-  id: string,
   post: FeedPost,
   isLoading: boolean,
 };
