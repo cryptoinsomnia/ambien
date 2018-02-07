@@ -57,9 +57,9 @@ const withData = graphql(Post, {
     id: id,
     notifyOnNetworkStatusChange: true,
   }),
-  props: ({ data: { loading, Post } }) => ({
+  props: ({ data: { loading, post } }) => ({
     isLoading: loading,
-    post: Post,
+    post,
   }),
 });
 

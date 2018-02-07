@@ -24,6 +24,11 @@ export const Text = styled.span`
   ${props => props.maxWidth && `max-width: ${props.maxWidth}`};
 `;
 
+export const Heading = styled.h1`
+  color: ${colors.black};
+  font-weight: 700;
+`;
+
 Text.defaultProps = {
   size: 'medium',
   color: `${colors.darkGrey}`,
