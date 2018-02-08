@@ -3,6 +3,7 @@
 
 export type SmallUser = {
   id: string,
+  name: string,
   username: string,
   karma: number,
   profileImageUrl: string,

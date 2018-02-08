@@ -44,15 +44,15 @@ const Post = ({
       <Row type="flex" justify="space-between">
         <Col xs={24} lg={19}>
           <Text size="large" bold>
-          {`${rank}. `}
-          <RouterText id={id} to={'post/' + id} size="large" bold>
-            {`${title}`}
-          </RouterText>
-          {url && (
-            <Link href={url} target="_blank">
-              <LinkIcon type="link" />
-            </Link>
-          )}
+            {`${rank}. `}
+            <RouterText id={id} to={'post/' + id} size="large" bold>
+              {`${title}`}
+            </RouterText>
+            {url && (
+              <Link href={url} target="_blank">
+                <LinkIcon type="link" />
+              </Link>
+            )}
           </Text>
         </Col>
         <Col lg={5}>
