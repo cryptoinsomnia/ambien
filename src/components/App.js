@@ -81,11 +81,17 @@ class App extends React.Component<Props> {
       return <div><Spin size="large" /></div>;
     }
 
-    if (this._isLoggedIn ()) {
-      return this.renderLoggedIn ();
-    } else {
-      return this.renderLoggedOut ();
-    }
+    return (
+      <Layout>
+        <Router>
+          <div>
+            <Header isLoggedIn={this._isLoggedIn ()} />
+            <Main />
+            <Footer />
+          </div>
+        </Router>
+      </Layout>
+    );
   }
 
   renderLoggedIn () {

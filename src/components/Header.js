@@ -1,16 +1,16 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { withRouter, type ContextRouter } from 'react-router';
-import { modularScale } from 'polished';
-import { Icon, Row, Col } from 'antd';
-import { withState, compose } from 'recompose';
+import {withRouter, type ContextRouter} from 'react-router';
+import {modularScale} from 'polished';
+import {Icon, Row, Col} from 'antd';
+import {withState, compose} from 'recompose';
 
 import Logo from './Logo';
-import { Box, Flex } from './Layout';
+import {Box, Flex} from './Layout';
 import Button from './Button';
-import ModalPresenter, { showModal } from './ModalPresenter';
-import { colors } from '../util/style';
+import ModalPresenter, {showModal} from './ModalPresenter';
+import {colors} from '../util/style';
 
 export type Item = 'top' | 'new' | 'trending';
 
@@ -18,6 +18,7 @@ export type HeaderMenuProps = {
   direction: 'row' | 'column',
   selectedItem?: ?Item,
   showLoginModal: () => void,
+  isLoggedIn: boolean,
 };
 
 type HeaderProps = {
@@ -42,28 +43,40 @@ const borderForMenuItem = (
 
 const MenuItem = styled.div`
   cursor: pointer;
-  padding: ${modularScale(0)} ${modularScale(2)};
-  ${props => borderForMenuItem(props.isSelected, props.direction)};
+  padding: ${modularScale (0)} ${modularScale (2)};
+  ${props => borderForMenuItem (props.isSelected, props.direction)};
   &:hover {
     color: ${colors.blue};
   }
 `;
 
-const HeaderMenu = ({ direction, showLoginModal }: HeaderMenuProps) => (
+const HeaderMenu = ({
+  direction,
+  showLoginModal,
+  isLoggedIn,
+}: HeaderMenuProps) => (
   <Flex direction={direction}>
-    {direction === 'column' && (
+    {direction === 'column' &&
       <Box>
         <MenuItem>
           <Icon type="plus-circle-o" /> Post
         </MenuItem>
-        <MenuItem onClick={showLoginModal}>
-          <Icon type="login" /> Login
-        </MenuItem>
-        <MenuItem>
-          <Icon type="user-add" /> Sign Up
-        </MenuItem>
-      </Box>
-    )}
+        {isLoggedIn
+          ? <div>
+              <MenuItem>
+                <Icon type="user-add" /> Log Out
+              </MenuItem>
+            </div>
+          : <div>
+              <MenuItem onClick={showLoginModal}>
+                <Icon type="login" /> Login
+              </MenuItem>
+              <MenuItem>
+                <Icon type="user-add" /> Sign Up
+              </MenuItem>
+            </div>}
+
+      </Box>}
   </Flex>
 );
 
@@ -71,12 +84,12 @@ HeaderMenu.defaultProps = {
   direction: 'row',
 };
 
-const HambugerIcon = styled(Icon)`
+const HambugerIcon = styled (Icon)`
   font-size: 2em;
   cursor: pointer;
 `;
 
-const withHamburgerMenuToggle = withState(
+const withHamburgerMenuToggle = withState (
   'isMenuOpen',
   'setMenuItemOpen',
   false
@@ -88,7 +101,7 @@ const Header = ({
   location,
   history,
 }: HeaderProps) => {
-  const showLoginModal = () => showModal('login', location, history);
+  const showLoginModal = () => showModal ('login', location, history);
   return (
     <Box white boxShadow>
       <Row type="flex" align="middle">
@@ -101,7 +114,7 @@ const Header = ({
         >
           <Logo to="/" />
         </Col>
-        <Col lg={0} xs={3} onClick={() => setMenuItemOpen(!isMenuOpen)}>
+        <Col lg={0} xs={3} onClick={() => setMenuItemOpen (!isMenuOpen)}>
           <HambugerIcon type="bars" />
         </Col>
         <Col
@@ -122,7 +135,7 @@ const Header = ({
           </Button>
         </Col>
       </Row>
-      {isMenuOpen && (
+      {isMenuOpen &&
         <Row type="flex" align="center">
           <Col lg={0} xs={24}>
             <HeaderMenu
@@ -131,11 +144,10 @@ const Header = ({
               direction="column"
             />
           </Col>
-        </Row>
-      )}
+        </Row>}
       <ModalPresenter />
     </Box>
   );
 };
 
-export default compose(withHamburgerMenuToggle, withRouter)(Header);
+export default compose (withHamburgerMenuToggle, withRouter) (Header);
