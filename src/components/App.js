@@ -5,7 +5,6 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import {graphql, compose} from 'react-apollo';
 import gql from 'graphql-tag';
 import {Spin} from 'antd';
-import PropTypes from 'prop-types';
 
 import Layout from './Layout';
 import Main from './Main';
