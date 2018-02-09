@@ -41,38 +41,10 @@ class App extends React.Component<Props> {
     }) (document, 'script', 'facebook-jssdk');
   }
 
-  _handleFBLogin = () => {
-    FB.login (
-      response => {
-        this._facebookCallback (response);
-      },
-      {scope: 'public_profile, email'}
-    );
-  };
-
-  _facebookCallback = async facebookResponse => {
-    if (facebookResponse.status === 'connected') {
-      const facebookToken = facebookResponse.authResponse.accessToken;
-      const graphcoolResponse = await this.props.authenticateUserMutation ({
-        variables: {facebookToken},
-      });
-      const graphcoolToken = graphcoolResponse.data.authenticateUser.token;
-      localStorage.setItem ('graphcoolToken', graphcoolToken);
-      window.location.reload ();
-    } else {
-      // User didn't authenticate. Maybe gracefully handle? TODO
-    }
-  };
-
   _isLoggedIn = () => {
     return (
       this.props.data.loggedInUser && this.props.data.loggedInUser.id !== ''
     );
-  };
-
-  _logout = () => {
-    localStorage.removeItem ('graphcoolToken');
-    window.location.reload ();
   };
 
   render () {
@@ -80,68 +52,11 @@ class App extends React.Component<Props> {
       return <div><Spin size="large" /></div>;
     }
 
-    if (this._isLoggedIn ()) {
-      return this.renderLoggedIn ();
-    } else {
-      return this.renderLoggedOut ();
-    }
-
-    // return (
-    //   <Layout>
-    //     <Router>
-    //       <div>
-    //         <Header isLoggedIn={this._isLoggedIn ()} />
-    //         <Main />
-    //         <Footer />
-    //       </div>
-    //     </Router>
-    //   </Layout>
-    // );
-  }
-
-  renderLoggedIn () {
     return (
       <Layout>
         <Router>
           <div>
-            <Header />
-            <div>
-              <span>
-                Logged in as ${this.props.data.loggedInUser.id}
-              </span>
-              <div className="pv3">
-                <span
-                  className="dib bg-red white pa3 pointer dim"
-                  onClick={this._logout}
-                >
-                  Logout
-                </span>
-              </div>
-            </div>
-            <Main />
-            <Footer />
-          </div>
-        </Router>
-      </Layout>
-    );
-  }
-
-  renderLoggedOut () {
-    return (
-      <Layout>
-        <Router>
-          <div>
-            <Header />
-            <div className="pv3">
-              <div>
-                <span
-                  onClick={this._handleFBLogin}
-                  className="dib pa3 white bg-blue dim pointer"
-                >
-                  Log in with Facebook
-                </span>
-              </div>
-            </div>
+            <Header isLoggedIn={this._isLoggedIn ()} />
             <Main />
             <Footer />
           </div>

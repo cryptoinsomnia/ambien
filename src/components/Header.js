@@ -17,14 +17,16 @@ export type Item = 'top' | 'new' | 'trending';
 export type HeaderMenuProps = {
   direction: 'row' | 'column',
   selectedItem?: ?Item,
-  showLoginModal: () => void,
+  showLoginModal:  () => void,
   isLoggedIn: boolean,
+  logout:  () => void,
 };
 
 type HeaderProps = {
   isMenuOpen: boolean,
   setMenuItemOpen: boolean => void,
   ...ContextRouter,
+  isLoggedIn: boolean,
 };
 
 // Compute the border for a MenuItem depending on whether it is selected
@@ -54,6 +56,7 @@ const HeaderMenu = ({
   direction,
   showLoginModal,
   isLoggedIn,
+  logout,
 }: HeaderMenuProps) => (
   <Flex direction={direction}>
     {direction === 'column' &&
@@ -63,16 +66,13 @@ const HeaderMenu = ({
         </MenuItem>
         {isLoggedIn
           ? <div>
-              <MenuItem>
-                <Icon type="user-add" /> Log Out
+              <MenuItem onClick={logout}>
+                <Icon /> Log Out
               </MenuItem>
             </div>
           : <div>
               <MenuItem onClick={showLoginModal}>
-                <Icon type="login" /> Login
-              </MenuItem>
-              <MenuItem>
-                <Icon type="user-add" /> Sign Up
+                <Icon type="login" /> Login or Sign Up
               </MenuItem>
             </div>}
 
@@ -100,8 +100,13 @@ const Header = ({
   setMenuItemOpen,
   location,
   history,
+  isLoggedIn,
 }: HeaderProps) => {
   const showLoginModal = () => showModal ('login', location, history);
+  const logout = () => {
+    localStorage.removeItem ('graphcoolToken');
+    window.location.reload ();
+  };
   return (
     <Box white boxShadow>
       <Row type="flex" align="middle">
@@ -127,12 +132,16 @@ const Header = ({
           <Button size="large" m={1} icon="plus-circle-o" type="primary">
             Post
           </Button>
-          <Button onClick={showLoginModal} size="large" m={1}>
-            Login
-          </Button>
-          <Button size="large" m={1}>
-            Sign Up
-          </Button>
+          {isLoggedIn
+            ? <Button onClick={logout} size="large" m={1}>
+                Logout
+              </Button>
+            : <span>
+                <Button onClick={showLoginModal} size="large" m={1}>
+                  Login or Sign Up
+                </Button>
+              </span>}
+
         </Col>
       </Row>
       {isMenuOpen &&
@@ -142,6 +151,8 @@ const Header = ({
               showLoginModal={showLoginModal}
               selectedItem="new"
               direction="column"
+              isLoggedIn={isLoggedIn}
+              logout={logout}
             />
           </Col>
         </Row>}
