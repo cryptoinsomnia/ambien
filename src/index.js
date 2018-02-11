@@ -18,10 +18,11 @@ ReactDOM.render(
           render={id => <PostDetails id={id.match.params.id} />}
         />
         <Route
-          path="/user/:id"
-          render={id => <Profile id={id.match.params.id} />}
+          path="/user/:username"
+          render={username => (
+            <Profile username={username.match.params.username} />
+          )}
         />
-        <Route exact path="/user" component={Profile} />
       </Switch>
     </BrowserRouter>
   </ApolloProvider>,
