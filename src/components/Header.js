@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { withRouter, type ContextRouter } from 'react-router';
 import { modularScale } from 'polished';
 import { Icon, Row, Col } from 'antd';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import { withState, compose } from 'recompose';
 
 import Logo from './Logo';
@@ -165,4 +167,20 @@ const Header = ({
   );
 };
 
-export default compose(withHamburgerMenuToggle, withRouter)(Header);
+const LOGGED_IN_USER = gql`
+  query LoggedInUser {
+    loggedInUser {
+      id
+    }
+  }
+`;
+
+const withIsLoggedIn = graphql(LOGGED_IN_USER, {
+  props: ({ data: { loading, loggedInUser } }) => ({
+    isLoggedIn: !loading && !!loggedInUser,
+  }),
+});
+
+export default compose(withIsLoggedIn, withHamburgerMenuToggle, withRouter)(
+  Header
+);
