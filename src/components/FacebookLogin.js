@@ -1,4 +1,3 @@
-// @flow
 /*global FB*/
 import React from 'react';
 import Button from './Button';
