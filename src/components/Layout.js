@@ -8,15 +8,8 @@ import { Layout } from 'antd';
 
 import { media } from '../util/style';
 import { colors, boxShadow, borderRadius } from '../util/style';
-import { borderColor, borderWidth } from 'styled-system';
 
 export default styled(Layout)``;
-
-export const ProfileImageWrapper = styled.div`
-  ${props => props.width && `border-radius: ${props.width / 2}`};
-  ${borderColor};
-  ${borderWidth};
-`;
 
 export const Box = styled.div`
   ${space};

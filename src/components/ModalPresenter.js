@@ -1,15 +1,16 @@
 // @flow
-import React, { type Node } from 'react';
+import React, {type Node} from 'react';
 import {
   withRouter,
   type Location,
   type RouterHistory,
   type ContextRouter,
 } from 'react-router';
-import { Modal } from 'antd';
+import {Modal} from 'antd';
 import URI from 'jsuri';
 
-import { locationToUri } from '../util/uri';
+import {locationToUri} from '../util/uri';
+import FacebookLogin from './FacebookLogin';
 
 // The enumeration of different modals we support.
 export type ModalType = 'login' | 'signup';
@@ -27,16 +28,16 @@ export const showModal = (
   location: Location,
   history: RouterHistory
 ): void => {
-  const newPath = locationToUri(location).addQueryParam('modal', modalName);
-  history.push(newPath.toString());
+  const newPath = locationToUri (location).addQueryParam ('modal', modalName);
+  history.push (newPath.toString ());
 };
 
 export const closeModal = (
   location: Location,
   history: RouterHistory
 ): void => {
-  const newPath = locationToUri(location).deleteQueryParam('modal');
-  history.push(newPath.toString());
+  const newPath = locationToUri (location).deleteQueryParam ('modal');
+  history.push (newPath.toString ());
 };
 
 const modalInfoForModalName: string => ?ModalInfo = name => {
@@ -45,31 +46,31 @@ const modalInfoForModalName: string => ?ModalInfo = name => {
       return {
         title: 'Login woot woot',
         footer: null,
-        content: <div> Login components here. </div>,
+        content: <div> <FacebookLogin /> </div>,
       };
     default:
       return null;
   }
 };
 
-const ModalPresenter = ({ location, history }: Props) => {
-  const { search } = location;
-  const modalName = new URI(search).getQueryParamValue('modal');
-  const modalInfo = modalInfoForModalName(modalName);
+const ModalPresenter = ({location, history}: Props) => {
+  const {search} = location;
+  const modalName = new URI (search).getQueryParamValue ('modal');
+  const modalInfo = modalInfoForModalName (modalName);
   if (!modalInfo) {
     return null;
   }
-  const { title, footer, content } = modalInfo;
+  const {title, footer, content} = modalInfo;
   return (
     <Modal
       title={title}
       visible={true}
       footer={footer}
-      onCancel={() => closeModal(location, history)}
+      onCancel={() => closeModal (location, history)}
     >
       {content}
     </Modal>
   );
 };
 
-export default withRouter(ModalPresenter);
+export default withRouter (ModalPresenter);

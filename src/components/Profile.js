@@ -2,10 +2,9 @@
 import React from 'react';
 import { Tabs } from 'antd';
 
-import { Flex, Box, Island, ProfileImageWrapper } from './Layout';
+import { Flex, Box, Island } from './Layout';
 import { type SmallUser } from '../types/api';
 
-import { colors } from '../util/style';
 import { Text } from './Text';
 import Image from './Image';
 
