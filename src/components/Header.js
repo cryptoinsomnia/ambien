@@ -17,9 +17,9 @@ export type Item = 'top' | 'new' | 'trending';
 export type HeaderMenuProps = {
   direction: 'row' | 'column',
   selectedItem?: ?Item,
-  showLoginModal:  () => void,
+  showLoginModal: () => void,
   isLoggedIn: boolean,
-  logout:  () => void,
+  logout: () => void,
 };
 
 type HeaderProps = {
