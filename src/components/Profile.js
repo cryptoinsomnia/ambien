@@ -4,11 +4,14 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { compose } from 'recompose';
 
+import Post from './Post';
+import '../fragments/PostFragment';
+
 import { Tabs, Spin } from 'antd';
 import { Flex, Box, Island } from './Layout';
-import { type SmallUser } from '../types/api';
+import { type SmallUser, type FeedPost } from '../types/api';
 
-import { Text, Heading, SubHeading } from './Text';
+import { Heading, SubHeading } from './Text';
 import Image from './Image';
 
 const TabPane = Tabs.TabPane;
@@ -22,10 +25,11 @@ type UserProps = {|
 type Props = {|
   ...UserProps,
   isLoading: boolean,
+  posts: Array<FeedPost>,
 |};
 
 const LoadingProfile = () => (
-  <Flex align="center">
+  <Flex align="center" direction="column">
     <Box my={4}>
       <Spin size="large" />
     </Box>
@@ -33,7 +37,7 @@ const LoadingProfile = () => (
 );
 
 const UserNotFound = () => (
-  <Flex align="center">
+  <Flex align="center" direction="column">
     <Box my={4}>
       <Heading>User not found :(</Heading>
     </Box>
@@ -78,24 +82,29 @@ const UserInteractions = () => (
   </Island>
 );
 
-const Profile = ({ user, isLoading, profileImageUrl, karma }: Props) => (
-  <Flex align="center" direction="column">
-    {isLoading ? (
-      <LoadingProfile />
-    ) : !user ? (
-      <UserNotFound />
-    ) : (
-      <React.Fragment>
+const Profile = ({ user, posts, isLoading, profileImageUrl, karma }: Props) => {
+  if (isLoading) {
+    return <LoadingProfile />;
+  } else if (!user) {
+    return <UserNotFound />;
+  } else {
+    return (
+      <Flex align="center" direction="column">
         <UserProfileInformation
           user={user}
           karma={karma}
           profileImageUrl={profileImageUrl}
         />
         <UserInteractions />
-      </React.Fragment>
-    )}
-  </Flex>
-);
+        {posts.map((post, index) => (
+          <Box key={post.id} borderBottom py={2}>
+            <Post rank={index + 1} {...post} />
+          </Box>
+        ))}
+      </Flex>
+    );
+  }
+};
 
 Profile.defaultProps = {
   isLoading: true,
@@ -110,8 +119,12 @@ const User = gql`
       id
       name
       username
+      posts {
+        ...PostData
+      }
     }
   }
+  ${Post.fragments.post}
 `;
 
 const withData = graphql(User, {
@@ -124,6 +137,7 @@ const withData = graphql(User, {
   props: ({ data: { loading, User } }) => ({
     isLoading: loading,
     user: User,
+    posts: loading || !User ? {} : User.posts,
   }),
 });
 

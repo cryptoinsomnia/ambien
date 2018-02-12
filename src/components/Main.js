@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import { withState, compose } from 'recompose';
 
 import Post from './Post';
+import '../fragments/PostFragment';
 import Button from './Button';
 import { Flex, Box, Island } from './Layout';
 import { type FeedPost } from '../types/api';
@@ -58,21 +59,10 @@ Main.defaultProps = {
 const AllPosts = gql`
   query AllPosts($first: Int!, $orderBy: PostOrderBy!) {
     allPosts(orderBy: $orderBy, first: $first) {
-      id
-      title
-      url
-      createdAt
-      author {
-        username
-      }
-      comments {
-        id
-      }
-      votes {
-        id
-      }
+      ...PostData
     }
   }
+  ${Post.fragments.post}
 `;
 
 // graphql(Query) returns a Higher Order Component that injects the result of Query into the Component
