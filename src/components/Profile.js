@@ -13,6 +13,7 @@ import { type SmallUser, type FeedPost } from '../types/api';
 
 import { Heading, SubHeading } from './Text';
 import Image from './Image';
+import PostList from './PostList';
 
 const TabPane = Tabs.TabPane;
 
@@ -66,21 +67,13 @@ const UserProfileInformation = ({
   </React.Fragment>
 );
 
-const UserInteractions = () => (
-  <Island my={[1, 2, 2, 2]} maxWidth="1000px" width={[0.85, 0.85, 0.9, 1.0]}>
-    <Tabs type="card" mx={[4, 3, 2, 1]}>
-      <TabPane tab="1233 Posts" key="1">
-        Content of Tab Pane 1
-      </TabPane>
-      <TabPane tab="4354 Upvotes" key="2">
-        Content of Tab Pane 2
-      </TabPane>
-      <TabPane tab="6764 Commments" key="3">
-        Content of Tab Pane 3
-      </TabPane>
-    </Tabs>
-  </Island>
-);
+const labelCounter = (num: number, label: string): string => {
+  if (num == 1) {
+    return `1 ${label}`;
+  } else {
+    return `${num} ${label}s`;
+  }
+};
 
 const Profile = ({ user, posts, isLoading, profileImageUrl, karma }: Props) => {
   if (isLoading) {
@@ -95,12 +88,23 @@ const Profile = ({ user, posts, isLoading, profileImageUrl, karma }: Props) => {
           karma={karma}
           profileImageUrl={profileImageUrl}
         />
-        <UserInteractions />
-        {posts.map((post, index) => (
-          <Box key={post.id} borderBottom py={2}>
-            <Post rank={index + 1} {...post} />
-          </Box>
-        ))}
+        <Island
+          my={[1, 2, 2, 2]}
+          maxWidth="1000px"
+          width={[0.85, 0.85, 0.9, 1.0]}
+        >
+          <Tabs type="card" mx={[4, 3, 2, 1]}>
+            <TabPane tab={labelCounter(posts.length, 'Post')} key="posts">
+              <PostList posts={posts} />
+            </TabPane>
+            <TabPane tab="4354 Upvotes" key="comments">
+              Content of Tab Pane 2
+            </TabPane>
+            <TabPane tab="6764 Commments" key="upvotes">
+              Content of Tab Pane 3
+            </TabPane>
+          </Tabs>
+        </Island>
       </Flex>
     );
   }
