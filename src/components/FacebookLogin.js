@@ -1,17 +1,24 @@
-/*global FB*/
+// @flow
 import React from 'react';
 import Button from './Button';
 import { withRouter } from 'react-router';
-import { graphql, compose } from 'react-apollo';
+import { graphql, compose, type MutationFunc } from 'react-apollo';
 import gql from 'graphql-tag';
 
-type Props = {
-  authenticateUserMutation?: ?() => void,
-};
+export type Props = {|
+  authenticateUserMutation: MutationFunc<{
+    loading: boolean,
+    data: {
+      authenticateUser: {
+        token: string,
+      },
+    },
+  }>,
+|};
 
 const FacebookLogin = ({ authenticateUserMutation }: Props) => {
   const _handleFBLogin = () => {
-    FB.login(
+    window.FB.login(
       response => {
         _facebookCallback(response);
       },
@@ -33,7 +40,7 @@ const FacebookLogin = ({ authenticateUserMutation }: Props) => {
     }
   };
   return (
-    <Button size="default" m={1} onClick={_handleFBLogin}>
+    <Button m={1} onClick={_handleFBLogin}>
       Login with Facebook
     </Button>
   );
@@ -48,5 +55,6 @@ const AUTHENTICATE_FACEBOOK_USER = gql`
 `;
 
 export default compose(
-  graphql(AUTHENTICATE_FACEBOOK_USER, { name: 'authenticateUserMutation' })
-)(withRouter(FacebookLogin));
+  graphql(AUTHENTICATE_FACEBOOK_USER, { name: 'authenticateUserMutation' }),
+  withRouter
+)(FacebookLogin);

@@ -1,30 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { ApolloProvider } from 'react-apollo';
 
 import App from './components/App';
-import client from './util/client';
-import PostDetails from './components/PostDetails';
-import Profile from './components/Profile';
+import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route
-          path="/post/:id"
-          render={id => <PostDetails id={id.match.params.id} />}
-        />
-        <Route
-          path="/user/:username"
-          render={username => (
-            <Profile username={username.match.params.username} />
-          )}
-        />
-      </Switch>
-    </BrowserRouter>
-  </ApolloProvider>,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));
+registerServiceWorker();
