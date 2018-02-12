@@ -8,6 +8,7 @@ import Footer from './Footer';
 import Header from './Header';
 import CreatePost from './CreatePost';
 import PostDetails from './PostDetails';
+import Profile from './Profile';
 
 import client from '../util/client';
 
@@ -19,6 +20,12 @@ const App = () => (
           <Header />
           <Route exact path="/" component={Main} />
           <Route exact path="/post" component={CreatePost} />
+          <Route
+            path="/user/:username"
+            render={username => (
+              <Profile username={username.match.params.username} />
+            )}
+          />
           <Route
             path="/post/:id"
             render={id => <PostDetails id={id.match.params.id} />}
