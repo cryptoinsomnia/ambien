@@ -1,15 +1,21 @@
 // @flow
-import * as React from 'react';
+import React, { Fragment, type Node } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { compose } from 'recompose';
 
+import Post from './Post';
+import Comment from './Comment';
+import '../fragments/CommentFragment';
+import '../fragments/PostFragment';
+
 import { Tabs, Spin } from 'antd';
 import { Flex, Box, Island } from './Layout';
-import { type SmallUser } from '../types/api';
+import { type SmallUser, type PostType, type CommentType } from '../types/api';
 
 import { Heading, SubHeading } from './Text';
 import Image from './Image';
+import PostList from './PostList';
 
 const TabPane = Tabs.TabPane;
 
@@ -22,22 +28,25 @@ type UserProps = {|
 type Props = {|
   ...UserProps,
   isLoading: boolean,
+  posts: Array<PostType>,
+  comments: Array<CommentType>,
 |};
-
-const LoadingProfile = () => (
-  <Flex align="center">
-    <Box my={4}>
-      <Spin size="large" />
-    </Box>
+const MessageBox = ({ children }: { children: Node }) => (
+  <Flex align="center" direction="column">
+    <Box my={4}>{children}</Box>
   </Flex>
 );
 
+const LoadingProfile = () => (
+  <MessageBox>
+    <Spin size="large" />
+  </MessageBox>
+);
+
 const UserNotFound = () => (
-  <Flex align="center">
-    <Box my={4}>
-      <Heading>User not found :(</Heading>
-    </Box>
-  </Flex>
+  <MessageBox>
+    <Heading>User not found :(</Heading>
+  </MessageBox>
 );
 
 const UserProfileInformation = ({
@@ -45,7 +54,7 @@ const UserProfileInformation = ({
   profileImageUrl,
   karma,
 }: UserProps) => (
-  <React.Fragment>
+  <Fragment>
     <Box my={[1, 2, 3, 3]}>
       <Image
         borderRadius
@@ -59,49 +68,89 @@ const UserProfileInformation = ({
     <SubHeading>
       @{user.username} - {karma}
     </SubHeading>
-  </React.Fragment>
+  </Fragment>
 );
 
-const UserInteractions = () => (
-  <Island my={[1, 2, 2, 2]} maxWidth="1000px" width={[0.85, 0.85, 0.9, 1.0]}>
-    <Tabs type="card" mx={[4, 3, 2, 1]}>
-      <TabPane tab="1233 Posts" key="1">
-        Content of Tab Pane 1
-      </TabPane>
-      <TabPane tab="4354 Upvotes" key="2">
-        Content of Tab Pane 2
-      </TabPane>
-      <TabPane tab="6764 Commments" key="3">
-        Content of Tab Pane 3
-      </TabPane>
-    </Tabs>
-  </Island>
-);
+const labelCounter = (num: number, label: string): string => {
+  if (num == 1) {
+    return `1 ${label}`;
+  } else {
+    return `${num} ${label}s`;
+  }
+};
 
-const Profile = ({ user, isLoading, profileImageUrl, karma }: Props) => (
-  <Flex align="center" direction="column">
-    {isLoading ? (
-      <LoadingProfile />
-    ) : !user ? (
-      <UserNotFound />
-    ) : (
-      <React.Fragment>
+const Profile = ({
+  user,
+  posts,
+  comments,
+  isLoading,
+  profileImageUrl,
+  karma,
+}: Props) => {
+  if (isLoading) {
+    return <LoadingProfile />;
+  } else if (!user) {
+    return <UserNotFound />;
+  } else {
+    return (
+      <Flex align="center" direction="column">
         <UserProfileInformation
           user={user}
           karma={karma}
           profileImageUrl={profileImageUrl}
         />
-        <UserInteractions />
-      </React.Fragment>
-    )}
-  </Flex>
-);
+        <Island
+          my={[1, 2, 2, 2]}
+          maxWidth="1000px"
+          width={[0.85, 0.85, 0.9, 1.0]}
+        >
+          <Tabs type="card" mx={[4, 3, 2, 1]}>
+            <TabPane tab={labelCounter(posts.length, 'Post')} key="posts">
+              {posts.length == 0 ? (
+                <MessageBox>
+                  <SubHeading>
+                    {user.name} has not made any posts yet
+                  </SubHeading>
+                </MessageBox>
+              ) : (
+                <PostList posts={posts} />
+              )}
+            </TabPane>
+            <TabPane
+              tab={labelCounter(comments.length, 'Comment')}
+              key="comments"
+            >
+              {comments.length == 0 ? (
+                <MessageBox>
+                  <SubHeading>{user.name} has not commented yet</SubHeading>
+                </MessageBox>
+              ) : (
+                <Fragment>
+                  {comments.map((comment, index) => (
+                    <Box key={comment.id} borderBottom py={2}>
+                      <Post rank={index + 1} {...comment.post} />
+                    </Box>
+                  ))}
+                </Fragment>
+              )}
+            </TabPane>
+            <TabPane tab={labelCounter(0, 'Vote')} key="upvotes">
+              Load upvotes here
+            </TabPane>
+          </Tabs>
+        </Island>
+      </Flex>
+    );
+  }
+};
 
 Profile.defaultProps = {
   isLoading: true,
   profileImageUrl:
     'https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/3/005/064/0e1/2ebf2c5.jpg',
   karma: 123456,
+  posts: [],
+  comments: [],
 };
 
 const User = gql`
@@ -110,8 +159,16 @@ const User = gql`
       id
       name
       username
+      posts {
+        ...PostData
+      }
+      comments {
+        ...CommentData
+      }
     }
   }
+  ${Post.fragments.post}
+  ${Comment.fragments.comment}
 `;
 
 const withData = graphql(User, {
@@ -124,6 +181,8 @@ const withData = graphql(User, {
   props: ({ data: { loading, User } }) => ({
     isLoading: loading,
     user: User,
+    posts: loading || !User ? {} : User.posts,
+    comments: loading || !User ? {} : User.comments,
   }),
 });
 

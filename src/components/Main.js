@@ -6,13 +6,15 @@ import gql from 'graphql-tag';
 import { withState, compose } from 'recompose';
 
 import Post from './Post';
+import '../fragments/PostFragment';
+import PostList from './PostList';
 import Button from './Button';
-import { Flex, Box, Island } from './Layout';
-import { type FeedPost } from '../types/api';
+import { Flex, Island } from './Layout';
+import { type PostType } from '../types/api';
 
 type FeedType = 'trending' | 'recent';
 type Props = {|
-  posts: Array<FeedPost>,
+  posts: Array<PostType>,
   paginate: () => void,
   feedType: FeedType,
   setFeedType: FeedType => {},
@@ -32,11 +34,7 @@ const Main = ({ posts, paginate, isLoading, feedType, setFeedType }: Props) => (
       </Radio.Group>
     </Flex>
     <Island my={3} maxWidth="1400px" width={[0.95, 0.95, 0.9, 0.85]}>
-      {posts.map((post, index) => (
-        <Box key={post.id} borderBottom py={2}>
-          <Post rank={index + 1} {...post} />
-        </Box>
-      ))}
+      <PostList posts={posts} />
       <Flex mt={2} direction="column" align="center">
         {isLoading ? (
           <Spin size="large" />
@@ -58,21 +56,10 @@ Main.defaultProps = {
 const AllPosts = gql`
   query AllPosts($first: Int!, $orderBy: PostOrderBy!) {
     allPosts(orderBy: $orderBy, first: $first) {
-      id
-      title
-      url
-      createdAt
-      author {
-        username
-      }
-      comments {
-        id
-      }
-      votes {
-        id
-      }
+      ...PostData
     }
   }
+  ${Post.fragments.post}
 `;
 
 // graphql(Query) returns a Higher Order Component that injects the result of Query into the Component

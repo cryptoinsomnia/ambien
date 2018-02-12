@@ -1,6 +1,8 @@
 // @flow
 // Where to define types that correspond to API objects.
 
+export type ContentType = 'POST' | 'COMMENT';
+
 export type SmallUser = {
   id: string,
   name: string,
@@ -14,7 +16,7 @@ export type Tag = {
   displayName: string,
 };
 
-export type FeedPost = {
+export type PostType = {
   id: string,
   url: string,
   title: string,
@@ -23,4 +25,13 @@ export type FeedPost = {
   comments: Array<{}>,
   votes: Array<{}>,
   tags: Array<Tag>,
+};
+
+export type CommentType = {
+  id: string,
+  content: string,
+  directParentType: ContentType,
+  post: PostType,
+  comment: CommentType,
+  createdAt: string,
 };
