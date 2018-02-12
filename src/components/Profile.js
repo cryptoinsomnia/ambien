@@ -5,7 +5,6 @@ import { Tabs } from 'antd';
 import { Flex, Box, Island } from './Layout';
 import { type SmallUser } from '../types/api';
 
-<<<<<<< HEAD
 import { Text } from './Text';
 import Image from './Image';
 
@@ -50,51 +49,3 @@ Profile.defaultProps = {
 };
 
 export default Profile;
-=======
-export type Props = {
-  id: string,
-  user: SmallUser,
-  isLoading: boolean,
-  isLoggedIn: boolean,
-};
-
-const Profile = ({ user, isLoading, isLoggedIn }: Props) => (
-  <Row type="flex" align="middle">
-    {isLoading ? (
-      <Spin size="large" />
-    ) : (
-      <div>
-        <Text> | isLoggedIn: {isLoggedIn} </Text>
-        <Text> | id: {user.id} </Text>
-        <Text> | username: {user.username}</Text>
-      </div>
-    )}
-  </Row>
-);
-
-Profile.defaultProps = {
-  isLoggedIn: false,
-};
-
-const User = gql`
-  query User($id: ID!) {
-    User(id: $id) {
-      id
-      username
-    }
-  }
-`;
-
-const withData = graphql(User, {
-  options: ({ id }) => ({
-    id: id,
-    notifyOnNetworkStatusChange: true,
-  }),
-  props: ({ data: { loading, User } }) => ({
-    isLoading: loading,
-    user: User,
-  }),
-});
-
-export default compose(withData)(Profile);
->>>>>>> Bump apollo dependency back to 2.0 and remove unused files
