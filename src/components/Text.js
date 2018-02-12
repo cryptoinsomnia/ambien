@@ -29,6 +29,11 @@ export const Heading = styled.h1`
   font-weight: 700;
 `;
 
+export const SubHeading = styled.h2`
+  color: ${colors.black};
+  font-weight: 300;
+`;
+
 Text.defaultProps = {
   size: 'medium',
   color: `${colors.darkGrey}`,
