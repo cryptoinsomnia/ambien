@@ -8,7 +8,7 @@ import { Tabs, Spin } from 'antd';
 import { Flex, Box, Island } from './Layout';
 import { type SmallUser } from '../types/api';
 
-import { Text, Heading, SubHeading } from './Text';
+import { Heading, SubHeading } from './Text';
 import Image from './Image';
 
 const TabPane = Tabs.TabPane;
