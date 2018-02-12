@@ -9,14 +9,14 @@ import { Text, RouterText } from './Text';
 import UserAvatar from './UserAvatar';
 import Voter from './Voter';
 import Link from './Link';
-import { type FeedPost } from '../types/api';
+import { type PostType } from '../types/api';
 import { colors } from '../util/style';
 
 // The props to a Post are everything in the FeedPost API object
 // and the ranking (order it appears in the list).
 export type Props = {
   rank: number,
-} & FeedPost;
+} & PostType;
 
 const LinkIcon = styled(Icon)`
   color: ${colors.black};

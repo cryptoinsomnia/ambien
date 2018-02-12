@@ -9,12 +9,12 @@ import Post from './Post';
 import '../fragments/PostFragment';
 import PostList from './PostList';
 import Button from './Button';
-import { Flex, Box, Island } from './Layout';
-import { type FeedPost } from '../types/api';
+import { Flex, Island } from './Layout';
+import { type PostType } from '../types/api';
 
 type FeedType = 'trending' | 'recent';
 type Props = {|
-  posts: Array<FeedPost>,
+  posts: Array<PostType>,
   paginate: () => void,
   feedType: FeedType,
   setFeedType: FeedType => {},

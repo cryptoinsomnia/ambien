@@ -6,10 +6,10 @@ import '../fragments/PostFragment';
 
 import { Box } from './Layout';
 
-import { type FeedPost } from '../types/api';
+import { type PostType } from '../types/api';
 
 type Props = {|
-  posts: Array<FeedPost>,
+  posts: Array<PostType>,
 |};
 
 const PostList = ({ posts }: Props) => (

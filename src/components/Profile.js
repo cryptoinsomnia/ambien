@@ -1,15 +1,17 @@
 // @flow
-import * as React from 'react';
+import React, { Fragment, type Node } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { compose } from 'recompose';
 
 import Post from './Post';
+import Comment from './Comment';
+import '../fragments/CommentFragment';
 import '../fragments/PostFragment';
 
 import { Tabs, Spin } from 'antd';
 import { Flex, Box, Island } from './Layout';
-import { type SmallUser, type FeedPost } from '../types/api';
+import { type SmallUser, type PostType, type CommentType } from '../types/api';
 
 import { Heading, SubHeading } from './Text';
 import Image from './Image';
@@ -26,23 +28,25 @@ type UserProps = {|
 type Props = {|
   ...UserProps,
   isLoading: boolean,
-  posts: Array<FeedPost>,
+  posts: Array<PostType>,
+  comments: Array<CommentType>,
 |};
-
-const LoadingProfile = () => (
+const MessageBox = ({ children }: { children: Node }) => (
   <Flex align="center" direction="column">
-    <Box my={4}>
-      <Spin size="large" />
-    </Box>
+    <Box my={4}>{children}</Box>
   </Flex>
 );
 
+const LoadingProfile = () => (
+  <MessageBox>
+    <Spin size="large" />
+  </MessageBox>
+);
+
 const UserNotFound = () => (
-  <Flex align="center" direction="column">
-    <Box my={4}>
-      <Heading>User not found :(</Heading>
-    </Box>
-  </Flex>
+  <MessageBox>
+    <Heading>User not found :(</Heading>
+  </MessageBox>
 );
 
 const UserProfileInformation = ({
@@ -50,7 +54,7 @@ const UserProfileInformation = ({
   profileImageUrl,
   karma,
 }: UserProps) => (
-  <React.Fragment>
+  <Fragment>
     <Box my={[1, 2, 3, 3]}>
       <Image
         borderRadius
@@ -64,7 +68,7 @@ const UserProfileInformation = ({
     <SubHeading>
       @{user.username} - {karma}
     </SubHeading>
-  </React.Fragment>
+  </Fragment>
 );
 
 const labelCounter = (num: number, label: string): string => {
@@ -75,7 +79,14 @@ const labelCounter = (num: number, label: string): string => {
   }
 };
 
-const Profile = ({ user, posts, isLoading, profileImageUrl, karma }: Props) => {
+const Profile = ({
+  user,
+  posts,
+  comments,
+  isLoading,
+  profileImageUrl,
+  karma,
+}: Props) => {
   if (isLoading) {
     return <LoadingProfile />;
   } else if (!user) {
@@ -95,13 +106,36 @@ const Profile = ({ user, posts, isLoading, profileImageUrl, karma }: Props) => {
         >
           <Tabs type="card" mx={[4, 3, 2, 1]}>
             <TabPane tab={labelCounter(posts.length, 'Post')} key="posts">
-              <PostList posts={posts} />
+              {posts.length == 0 ? (
+                <MessageBox>
+                  <SubHeading>
+                    {user.name} has not made any posts yet
+                  </SubHeading>
+                </MessageBox>
+              ) : (
+                <PostList posts={posts} />
+              )}
             </TabPane>
-            <TabPane tab="4354 Upvotes" key="comments">
-              Content of Tab Pane 2
+            <TabPane
+              tab={labelCounter(comments.length, 'Comment')}
+              key="comments"
+            >
+              {comments.length == 0 ? (
+                <MessageBox>
+                  <SubHeading>{user.name} has not commented yet</SubHeading>
+                </MessageBox>
+              ) : (
+                <Fragment>
+                  {comments.map((comment, index) => (
+                    <Box key={comment.id} borderBottom py={2}>
+                      <Post rank={index + 1} {...comment.post} />
+                    </Box>
+                  ))}
+                </Fragment>
+              )}
             </TabPane>
-            <TabPane tab="6764 Commments" key="upvotes">
-              Content of Tab Pane 3
+            <TabPane tab={labelCounter(0, 'Vote')} key="upvotes">
+              Load upvotes here
             </TabPane>
           </Tabs>
         </Island>
@@ -115,6 +149,8 @@ Profile.defaultProps = {
   profileImageUrl:
     'https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/3/005/064/0e1/2ebf2c5.jpg',
   karma: 123456,
+  posts: [],
+  comments: [],
 };
 
 const User = gql`
@@ -126,9 +162,13 @@ const User = gql`
       posts {
         ...PostData
       }
+      comments {
+        ...CommentData
+      }
     }
   }
   ${Post.fragments.post}
+  ${Comment.fragments.comment}
 `;
 
 const withData = graphql(User, {
@@ -142,6 +182,7 @@ const withData = graphql(User, {
     isLoading: loading,
     user: User,
     posts: loading || !User ? {} : User.posts,
+    comments: loading || !User ? {} : User.comments,
   }),
 });
 
