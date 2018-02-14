@@ -72,7 +72,7 @@ const UserProfileInformation = ({
 );
 
 const labelCounter = (num: number, label: string): string => {
-  if (num == 1) {
+  if (num === 1) {
     return `1 ${label}`;
   } else {
     return `${num} ${label}s`;
@@ -106,7 +106,7 @@ const Profile = ({
         >
           <Tabs type="card" mx={[4, 3, 2, 1]}>
             <TabPane tab={labelCounter(posts.length, 'Post')} key="posts">
-              {posts.length == 0 ? (
+              {posts.length === 0 ? (
                 <MessageBox>
                   <SubHeading>
                     {user.name} has not made any posts yet
@@ -120,7 +120,7 @@ const Profile = ({
               tab={labelCounter(comments.length, 'Comment')}
               key="comments"
             >
-              {comments.length == 0 ? (
+              {comments.length === 0 ? (
                 <MessageBox>
                   <SubHeading>{user.name} has not commented yet</SubHeading>
                 </MessageBox>
