@@ -13,7 +13,7 @@ Assuming you have [yarn](https://github.com/yarnpkg/yarn) and [node 8](https://n
 ```
 $ git clone https://github.com/cryptoinsomnia/ambien.git
 $ cd ambien
-$ yarn install && npm start
+$ yarn install && yarn start
 ```
 
 ### Installing yarn
