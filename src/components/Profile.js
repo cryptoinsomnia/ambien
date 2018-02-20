@@ -155,7 +155,7 @@ Profile.defaultProps = {
 
 const User = gql`
   query UserProfile($usernameToFetch: String!) {
-    User(username: $usernameToFetch) {
+    user(username: $usernameToFetch) {
       id
       name
       username
@@ -178,11 +178,11 @@ const withData = graphql(User, {
     },
     notifyOnNetworkStatusChange: true,
   }),
-  props: ({ data: { loading, User } }) => ({
+  props: ({ data: { loading, user } }) => ({
     isLoading: loading,
-    user: User,
-    posts: loading || !User ? {} : User.posts,
-    comments: loading || !User ? {} : User.comments,
+    user: user,
+    posts: loading || !user ? {} : user.posts,
+    comments: loading || !user ? {} : user.comments,
   }),
 });
 
