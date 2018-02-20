@@ -169,15 +169,15 @@ const Header = ({
 
 const LOGGED_IN_USER = gql`
   query LoggedInUser {
-    loggedInUser {
+    me {
       id
     }
   }
 `;
 
 const withIsLoggedIn = graphql(LOGGED_IN_USER, {
-  props: ({ data: { loading, loggedInUser } }) => ({
-    isLoggedIn: !loading && !!loggedInUser,
+  props: ({ data: { loading, me } }) => ({
+    isLoggedIn: !loading && !!me,
   }),
 });
 
