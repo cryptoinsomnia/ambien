@@ -1,7 +1,6 @@
 import gql from 'graphql-tag';
-import Post from '../components/Post';
 
-Post.fragments = {
+const PostFragments = {
   post: gql`
     fragment PostData on Post {
       id
@@ -20,3 +19,5 @@ Post.fragments = {
     }
   `,
 };
+
+export default PostFragments;

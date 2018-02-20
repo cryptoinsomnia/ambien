@@ -1,9 +1,7 @@
 import gql from 'graphql-tag';
-import Post from '../components/Post';
-import Comment from '../components/Comment';
-import '../fragments/PostFragment';
+import PostFragments from './PostFragments';
 
-Comment.fragments = {
+const CommentFragments = {
   comment: gql`
     fragment CommentData on Comment {
       content
@@ -13,6 +11,8 @@ Comment.fragments = {
         ...PostData
       }
     }
-    ${Post.fragments.post}
+    ${PostFragments.post}
   `,
 };
+
+export default CommentFragments;

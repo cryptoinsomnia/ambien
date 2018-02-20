@@ -2,7 +2,6 @@
 import * as React from 'react';
 
 import Post from './Post';
-import '../fragments/PostFragment';
 
 import { Box } from './Layout';
 
