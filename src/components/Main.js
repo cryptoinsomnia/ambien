@@ -53,9 +53,9 @@ Main.defaultProps = {
 };
 
 // The AllPosts graphql query
-const AllPosts = gql`
-  query AllPosts($first: Int!, $orderBy: PostOrderBy!) {
-    allPosts(orderBy: $orderBy, first: $first) {
+const Feed = gql`
+  query Feed($first: Int!, $orderBy: PostOrderByInput!) {
+    feed(orderBy: $orderBy, first: $first) {
       ...PostData
     }
   }
@@ -64,7 +64,7 @@ const AllPosts = gql`
 
 // graphql(Query) returns a Higher Order Component that injects the result of Query into the Component
 // to which it is applied. Takes an options argument.
-const withData = graphql(AllPosts, {
+const withData = graphql(Feed, {
   options: ({ feedType }) => ({
     variables: {
       first: 10,
@@ -73,12 +73,12 @@ const withData = graphql(AllPosts, {
     },
     notifyOnNetworkStatusChange: true,
   }),
-  props: ({ data: { loading, allPosts, fetchMore } }) => ({
+  props: ({ data: { loading, feed, fetchMore } }) => ({
     isLoading: loading,
-    posts: allPosts,
+    posts: feed,
     paginate: () =>
       fetchMore({
-        variables: { first: allPosts.length + 10 },
+        variables: { first: feed.length + 10 },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           return fetchMoreResult;
         },
