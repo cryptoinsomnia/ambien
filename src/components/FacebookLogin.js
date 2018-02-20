@@ -32,7 +32,7 @@ const FacebookLogin = ({ authenticateUserMutation }: Props) => {
       const graphcoolResponse = await authenticateUserMutation({
         variables: { facebookToken },
       });
-      const graphcoolToken = graphcoolResponse.data.authenticateUser.token;
+      const graphcoolToken = graphcoolResponse.data.authenticateFacebook.token;
       localStorage.setItem('graphcoolToken', graphcoolToken);
       window.location.href = '/';
     } else {
@@ -48,7 +48,7 @@ const FacebookLogin = ({ authenticateUserMutation }: Props) => {
 
 const AUTHENTICATE_FACEBOOK_USER = gql`
   mutation AuthenticateUserMutation($facebookToken: String!) {
-    authenticateUser(facebookToken: $facebookToken) {
+    authenticateFacebook(fbToken: $facebookToken) {
       token
     }
   }
