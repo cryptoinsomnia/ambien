@@ -6,7 +6,6 @@ import gql from 'graphql-tag';
 import { withState, compose } from 'recompose';
 
 import Post from './Post';
-import '../fragments/PostFragment';
 import PostList from './PostList';
 import Button from './Button';
 import { Flex, Island } from './Layout';

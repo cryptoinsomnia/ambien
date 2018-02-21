@@ -3,6 +3,7 @@ import React from 'react';
 import { Tag, Row, Col, Icon } from 'antd';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import styled from 'styled-components';
+import gql from 'graphql-tag';
 
 import { Box } from './Layout';
 import { Text, RouterText } from './Text';
@@ -76,6 +77,26 @@ const Post = ({
     </Col>
   </Row>
 );
+
+Post.fragments = {
+  post: gql`
+    fragment PostData on Post {
+      id
+      title
+      url
+      createdAt
+      author {
+        username
+      }
+      comments {
+        id
+      }
+      votes {
+        id
+      }
+    }
+  `,
+};
 
 Post.defaultProps = {
   tags: [{ name: 'btc', displayName: 'Bitcoin' }],

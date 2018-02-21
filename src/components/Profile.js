@@ -6,8 +6,6 @@ import { compose } from 'recompose';
 
 import Post from './Post';
 import Comment from './Comment';
-import '../fragments/CommentFragment';
-import '../fragments/PostFragment';
 
 import { Tabs, Spin } from 'antd';
 import { Flex, Box, Island } from './Layout';
