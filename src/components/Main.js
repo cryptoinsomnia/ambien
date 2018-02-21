@@ -5,7 +5,7 @@ import { Spin, Radio } from 'antd';
 import gql from 'graphql-tag';
 import { withState, compose } from 'recompose';
 
-import PostFragments from '../fragments/PostFragments';
+import Post from './Post';
 import PostList from './PostList';
 import Button from './Button';
 import { Flex, Island } from './Layout';
@@ -58,7 +58,7 @@ const Feed = gql`
       ...PostData
     }
   }
-  ${PostFragments.post}
+  ${Post.fragments.post}
 `;
 
 // graphql(Query) returns a Higher Order Component that injects the result of Query into the Component

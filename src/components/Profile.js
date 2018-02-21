@@ -5,8 +5,7 @@ import gql from 'graphql-tag';
 import { compose } from 'recompose';
 
 import Post from './Post';
-import CommentFragments from '../fragments/CommentFragments';
-import PostFragments from '../fragments/PostFragments';
+import Comment from './Comment';
 
 import { Tabs, Spin } from 'antd';
 import { Flex, Box, Island } from './Layout';
@@ -166,8 +165,8 @@ const User = gql`
       }
     }
   }
-  ${PostFragments.post}
-  ${CommentFragments.comment}
+  ${Post.fragments.post}
+  ${Comment.fragments.comment}
 `;
 
 const withData = graphql(User, {
