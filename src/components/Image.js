@@ -7,7 +7,7 @@ const Image = styled(ReactImageFallback)`
     props.hasBorder && `border: ${props.borderWidth}px solid ${colors.blue}`};
   ${props => props.borderRadius && `border-radius: ${props.width / 2}px`};
   ${props => props.boxShadow && `box-shadow: ${boxShadow}`};
-  height: ${props => props.width * props.ratio};
+  height: ${props => props.height};
   width: ${props => props.width};
 `;
 
@@ -15,6 +15,7 @@ Image.defaultProps = {
   borderWidth: 1,
   ratio: 1,
   width: 200,
+  height: 200,
 };
 
 export default Image;

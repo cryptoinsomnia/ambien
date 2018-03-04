@@ -35,3 +35,11 @@ export type CommentType = {
   comment: CommentType,
   createdAt: string,
 };
+
+export type VoteType = {
+  id: string,
+  contentType: ContentType,
+  post: PostType,
+  comment: CommentType,
+  createdAt: string,
+};
