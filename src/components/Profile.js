@@ -125,7 +125,7 @@ const Profile = ({ user, posts, comments, votes, isLoading, karma }: Props) => {
                 </Fragment>
               )}
             </TabPane>
-            <TabPane tab={labelCounter(0, 'Vote')} key="upvotes">
+            <TabPane tab={labelCounter(votes.length, 'Vote')} key="upvotes">
               {votes.length === 0 ? (
                 <MessageBox>
                   <SubHeading>

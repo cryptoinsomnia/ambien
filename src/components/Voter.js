@@ -8,6 +8,7 @@ import { Text } from './Text';
 
 export type Props = {|
   count: number,
+  didVote: boolean,
   onClick: () => void,
 |};
 
@@ -20,9 +21,9 @@ const VotingIcon = styled(Icon)`
   }
 `;
 
-const Voter = ({ count, onClick }: Props) => (
+const Voter = ({ count, didVote, onClick }: Props) => (
   <Flex direction="column" align="center">
-    <VotingIcon onClick={onClick} type="caret-up" />
+    {didVote ? null : <VotingIcon onClick={onClick} type="caret-up" />}
     <Text>{count}</Text>
   </Flex>
 );

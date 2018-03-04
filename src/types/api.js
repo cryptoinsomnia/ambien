@@ -22,8 +22,8 @@ export type PostType = {
   title: string,
   createdAt: string,
   author: SmallUser,
-  comments: Array<{}>,
-  votes: Array<{}>,
+  comments: Array<CommentType>,
+  votes: Array<VoteType>,
   tags: Array<Tag>,
 };
 
@@ -42,4 +42,5 @@ export type VoteType = {
   post: PostType,
   comment: CommentType,
   createdAt: string,
+  voter: SmallUser,
 };

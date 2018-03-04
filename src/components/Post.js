@@ -10,7 +10,7 @@ import { Text, RouterText } from './Text';
 import UserAvatar from './UserAvatar';
 import Voter from './Voter';
 import Link from './Link';
-import { type PostType } from '../types/api';
+import { type PostType, type VoteType } from '../types/api';
 import { colors } from '../util/style';
 
 // The props to a Post are everything in the FeedPost API object
@@ -23,6 +23,10 @@ const LinkIcon = styled(Icon)`
   color: ${colors.black};
   margin-left: 5px;
 `;
+
+function UserDidVote(votes: [VoteType]): boolean {
+  return votes.filter(vote => vote.voter.id == 'figure_out_own_id').length > 0;
+}
 
 const Post = ({
   rank,
@@ -38,7 +42,11 @@ const Post = ({
   <Row type="flex" align="middle">
     <Col lg={1} xs={4}>
       <Row type="flex" align="middle" justify="center">
-        <Voter count={votes.length} onClick={() => {}} />
+        <Voter
+          count={votes.length}
+          didVote={UserDidVote(votes)}
+          onClick={() => {}}
+        />
       </Row>
     </Col>
     <Col lg={23} xs={20}>
@@ -93,6 +101,9 @@ Post.fragments = {
       }
       votes {
         id
+        voter {
+          id
+        }
       }
     }
   `,
