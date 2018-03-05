@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { withRouter, type ContextRouter } from 'react-router';
 import { modularScale } from 'polished';
 import { Icon, Row, Col } from 'antd';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { withState, compose } from 'recompose';
 
 import Logo from './Logo';
@@ -13,6 +11,8 @@ import { Box, Flex } from './Layout';
 import Button from './Button';
 import ModalPresenter, { showModal } from './ModalPresenter';
 import { colors } from '../util/style';
+import loggedInUser from '../util/user';
+import { type SmallUser } from '../types/api';
 
 export type Item = 'top' | 'new' | 'trending';
 
@@ -20,7 +20,7 @@ export type HeaderMenuProps = {
   direction: 'row' | 'column',
   selectedItem?: ?Item,
   showLoginModal: () => void,
-  isLoggedIn: boolean,
+  loggedInUser: SmallUser,
   logout: () => void,
 };
 
@@ -28,7 +28,7 @@ type HeaderProps = {
   isMenuOpen: boolean,
   setMenuItemOpen: boolean => void,
   ...ContextRouter,
-  isLoggedIn: boolean,
+  loggedInUser: SmallUser,
 };
 
 // Compute the border for a MenuItem depending on whether it is selected
@@ -57,7 +57,7 @@ const MenuItem = styled.div`
 const HeaderMenu = ({
   direction,
   showLoginModal,
-  isLoggedIn,
+  loggedInUser,
   logout,
 }: HeaderMenuProps) => (
   <Flex direction={direction}>
@@ -66,7 +66,7 @@ const HeaderMenu = ({
         <MenuItem>
           <Icon type="plus-circle-o" /> Post
         </MenuItem>
-        {isLoggedIn ? (
+        {loggedInUser ? (
           <div>
             <MenuItem onClick={logout}>
               <Icon /> Log Out
@@ -104,7 +104,7 @@ const Header = ({
   setMenuItemOpen,
   location,
   history,
-  isLoggedIn,
+  loggedInUser,
 }: HeaderProps) => {
   const showLoginModal = () => showModal('login', location, history);
   const logout = () => {
@@ -136,7 +136,7 @@ const Header = ({
           <Button size="large" m={1} icon="plus-circle-o" type="primary">
             Post
           </Button>
-          {isLoggedIn ? (
+          {loggedInUser ? (
             <Button onClick={logout} size="large" m={1}>
               Logout
             </Button>
@@ -156,7 +156,7 @@ const Header = ({
               showLoginModal={showLoginModal}
               selectedItem="new"
               direction="column"
-              isLoggedIn={isLoggedIn}
+              loggedInUser={loggedInUser}
               logout={logout}
             />
           </Col>
@@ -167,20 +167,6 @@ const Header = ({
   );
 };
 
-const LOGGED_IN_USER = gql`
-  query LoggedInUser {
-    me {
-      id
-    }
-  }
-`;
-
-const withIsLoggedIn = graphql(LOGGED_IN_USER, {
-  props: ({ data: { loading, me } }) => ({
-    isLoggedIn: !loading && !!me,
-  }),
-});
-
-export default compose(withIsLoggedIn, withHamburgerMenuToggle, withRouter)(
+export default compose(loggedInUser, withHamburgerMenuToggle, withRouter)(
   Header
 );
