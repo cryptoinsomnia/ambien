@@ -10,7 +10,7 @@ import { Text, RouterText } from './Text';
 import UserAvatar from './UserAvatar';
 import Voter from './Voter';
 import Link from './Link';
-import { type PostType, type VoteType } from '../types/api';
+import { type PostType } from '../types/api';
 import { colors } from '../util/style';
 
 // The props to a Post are everything in the FeedPost API object
@@ -23,10 +23,6 @@ const LinkIcon = styled(Icon)`
   color: ${colors.black};
   margin-left: 5px;
 `;
-
-function UserDidVote(votes: [VoteType]): boolean {
-  return votes.filter(vote => vote.voter.id == 'figure_out_own_id').length > 0;
-}
 
 const Post = ({
   rank,
@@ -42,19 +38,15 @@ const Post = ({
   <Row type="flex" align="middle">
     <Col lg={1} xs={4}>
       <Row type="flex" align="middle" justify="center">
-        <Voter
-          count={votes.length}
-          didVote={UserDidVote(votes)}
-          onClick={() => {}}
-        />
+        <Voter id={id} type="POST" votes={votes} />
       </Row>
     </Col>
     <Col lg={23} xs={20}>
       <Row type="flex" justify="space-between">
         <Col xs={24} lg={19}>
-          <Text size="large" bold>
+          <Text size="large" bold="true">
             {`${rank}. `}
-            <RouterText id={id} to={'post/' + id} size="large" bold>
+            <RouterText id={id} to={'post/' + id} size="large" bold="true">
               {`${title}`}
             </RouterText>
             {url && (
