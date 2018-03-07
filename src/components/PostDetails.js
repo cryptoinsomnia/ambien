@@ -19,18 +19,24 @@ const PostDetails = ({post, isLoading}: Props) => (
   <Row type="flex" align="middle">
     {isLoading
       ? <Spin size="large" />
-      : <div>
-          <Text> | id: {post.id} </Text>
-          <Text> | title: {post.title}</Text>
-          <Text> | url: {post.url}</Text>
-          <Text> | createdAt: {post.createdAt}</Text>
-        </div>}
+      : post === undefined
+          ? <div>
+              <Text bold italic size="large">
+                Error loading post. Please try again.
+              </Text>
+            </div>
+          : <div>
+              <Text> | id: {post.id} </Text>
+              <Text> | title: {post.title}</Text>
+              <Text> | url: {post.url}</Text>
+              <Text> | createdAt: {post.createdAt}</Text>
+            </div>}
   </Row>
 );
 
 const Post = gql`
   query Post($id: ID!) {
-    Post(id: $id) {
+    post(id: $id) {
       id
       title
       url
