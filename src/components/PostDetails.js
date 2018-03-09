@@ -7,7 +7,6 @@ import {compose} from 'recompose';
 import {Spin} from 'antd';
 
 import Post from './Post';
-import Comment from './Comment';
 import {Text} from './Text';
 import {type PostType} from '../types/api';
 
