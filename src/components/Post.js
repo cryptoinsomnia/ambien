@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 import {Box} from './Layout';
 import {Text, RouterText} from './Text';
 import UserAvatar from './UserAvatar';
-import Voter from './Voter';
+import Vote from './Vote';
 import Link from './Link';
 import {type PostType} from '../types/api';
 import {colors} from '../util/style';
@@ -38,15 +38,15 @@ const Post = ({
   <Row type="flex" align="middle">
     <Col lg={1} xs={4}>
       <Row type="flex" align="middle" justify="center">
-        <Voter count={votes.length} onClick={() => {}} />
+        <Vote id={id} type="POST" votes={votes} />
       </Row>
     </Col>
     <Col lg={23} xs={20}>
       <Row type="flex" justify="space-between">
         <Col xs={24} lg={19}>
-          <Text size="large" bold>
+          <Text size="large" bold="true">
             {`${rank}. `}
-            <RouterText id={id} to={'post/' + id} size="large" bold>
+            <RouterText id={id} to={'post/' + id} size="large" bold="true">
               {`${title}`}
             </RouterText>
             {url &&
@@ -92,6 +92,9 @@ Post.fragments = {
       }
       votes {
         id
+        voter {
+          id
+        }
       }
     }
   `,
