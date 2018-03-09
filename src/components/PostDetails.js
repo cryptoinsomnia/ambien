@@ -6,6 +6,8 @@ import {Row} from 'antd';
 import {compose} from 'recompose';
 import {Spin} from 'antd';
 
+import Post from './Post';
+import Comment from './Comment';
 import {Text} from './Text';
 import {type PostType} from '../types/api';
 
@@ -34,36 +36,25 @@ const PostDetails = ({post, isLoading}: Props) => (
   </Row>
 );
 
-const Post = gql`
+const SinglePostFetch = gql`
   query Post($id: ID!) {
     post(id: $id) {
-      id
-      title
-      url
-      createdAt
-      author {
-        username
-      }
-      comments {
-        id
-      }
-      votes {
-        id
-      }
+      ...PostData
     }
   }
+  ${Post.fragments.post}
 `;
 
-// graphql(Query) returns a Higher Order Component that injects the result of Query into the Component
-// to which it is applied. Takes an options argument.
-const withData = graphql (Post, {
-  options: ({id}) => ({
-    id: id,
+const withData = graphql (SinglePostFetch, {
+  options: props => ({
+    variables: {
+      id: props.id,
+    },
     notifyOnNetworkStatusChange: true,
   }),
-  props: ({data: {loading, Post}}) => ({
+  props: ({data: {loading, post}}) => ({
     isLoading: loading,
-    post: Post,
+    post: loading || !post ? null : post,
   }),
 });
 
