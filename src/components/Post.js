@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 import { Box } from './Layout';
 import { Text, RouterText } from './Text';
 import UserAvatar from './UserAvatar';
-import Voter from './Voter';
+import Vote from './Vote';
 import Link from './Link';
 import { type PostType } from '../types/api';
 import { colors } from '../util/style';
@@ -38,7 +38,7 @@ const Post = ({
   <Row type="flex" align="middle">
     <Col lg={1} xs={4}>
       <Row type="flex" align="middle" justify="center">
-        <Voter id={id} type="POST" votes={votes} />
+        <Vote id={id} type="POST" votes={votes} />
       </Row>
     </Col>
     <Col lg={23} xs={20}>
