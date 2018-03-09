@@ -1,7 +1,7 @@
 // @flow
 // Where to define types that correspond to API objects.
 
-// Disbale linter because there are circle dependencies
+// Disable linter because there are circular dependencies
 /* eslint-disable no-use-before-define */
 export type ContentType = 'POST' | 'COMMENT';
 

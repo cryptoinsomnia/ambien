@@ -11,7 +11,7 @@ import { Box, Flex } from './Layout';
 import Button from './Button';
 import ModalPresenter, { showModal } from './ModalPresenter';
 import { colors } from '../util/style';
-import loggedInUser from '../util/user';
+import withLoggedInUser from '../util/user';
 import { type SmallUser } from '../types/api';
 
 export type Item = 'top' | 'new' | 'trending';
@@ -167,6 +167,6 @@ const Header = ({
   );
 };
 
-export default compose(loggedInUser, withHamburgerMenuToggle, withRouter)(
+export default compose(withLoggedInUser, withHamburgerMenuToggle, withRouter)(
   Header
 );

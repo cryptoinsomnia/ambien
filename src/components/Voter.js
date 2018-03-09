@@ -10,7 +10,7 @@ import { showModal } from './ModalPresenter';
 import { Flex } from './Layout';
 import { Text } from './Text';
 import { type VoteType, type ContentType, type SmallUser } from '../types/api';
-import loggedInUser from '../util/user';
+import withLoggedInUser from '../util/user';
 
 export type Props = {
   id: string,
@@ -51,9 +51,9 @@ const Voter = ({
     if (!loggedInUser) {
       return false;
     }
-    return votes.filter(vote => vote.voter.id === loggedInUser.id).length > 0;
+    return votes.some(vote => vote.voter.id === loggedInUser.id);
   };
-  const vote = async () => {
+  const vote = () => {
     if (type === 'POST') {
       voteOnPostMutation({
         variables: {
@@ -112,4 +112,4 @@ const VoteWithData = graphql(VoteOnPostMutation, {
   name: 'voteOnPostMutation',
 });
 
-export default compose(loggedInUser, withRouter, VoteWithData)(Voter);
+export default compose(withLoggedInUser, withRouter, VoteWithData)(Voter);

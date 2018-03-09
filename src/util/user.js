@@ -15,10 +15,10 @@ const LOGGED_IN_USER = gql`
   }
 `;
 
-const loggedInUser = graphql(LOGGED_IN_USER, {
+const withLoggedInUser = graphql(LOGGED_IN_USER, {
   props: ({ data: { loading, me } }) => ({
     loggedInUser: loading ? null : me,
   }),
 });
 
-export default loggedInUser;
+export default withLoggedInUser;
