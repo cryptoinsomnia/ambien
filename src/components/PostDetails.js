@@ -6,6 +6,7 @@ import {Row} from 'antd';
 import {compose} from 'recompose';
 import {Spin} from 'antd';
 
+import Post from './Post';
 import {Text} from './Text';
 import {type PostType} from '../types/api';
 
@@ -19,45 +20,40 @@ const PostDetails = ({post, isLoading}: Props) => (
   <Row type="flex" align="middle">
     {isLoading
       ? <Spin size="large" />
-      : <div>
-          <Text> | id: {post.id} </Text>
-          <Text> | title: {post.title}</Text>
-          <Text> | url: {post.url}</Text>
-          <Text> | createdAt: {post.createdAt}</Text>
-        </div>}
+      : post === undefined
+          ? <div>
+              <Text bold italic size="large">
+                Error loading post. Please try again.
+              </Text>
+            </div>
+          : <div>
+              <Text> | id: {post.id} </Text>
+              <Text> | title: {post.title}</Text>
+              <Text> | url: {post.url}</Text>
+              <Text> | createdAt: {post.createdAt}</Text>
+            </div>}
   </Row>
 );
 
-const Post = gql`
+const SinglePostFetch = gql`
   query Post($id: ID!) {
-    Post(id: $id) {
-      id
-      title
-      url
-      createdAt
-      author {
-        username
-      }
-      comments {
-        id
-      }
-      votes {
-        id
-      }
+    post(id: $id) {
+      ...PostData
     }
   }
+  ${Post.fragments.post}
 `;
 
-// graphql(Query) returns a Higher Order Component that injects the result of Query into the Component
-// to which it is applied. Takes an options argument.
-const withData = graphql (Post, {
-  options: ({id}) => ({
-    id: id,
+const withData = graphql (SinglePostFetch, {
+  options: props => ({
+    variables: {
+      id: props.id,
+    },
     notifyOnNetworkStatusChange: true,
   }),
-  props: ({data: {loading, Post}}) => ({
+  props: ({data: {loading, post}}) => ({
     isLoading: loading,
-    post: Post,
+    post: loading || !post ? null : post,
   }),
 });
 
