@@ -33,6 +33,7 @@ const PostDetails = ({post, isLoading}: Props) => (
                 <Post {...post} noLinks />
               </Box>
               <Box borderBottom>
+                {console.log (post)}
                 <PostContent content={post.content} />
               </Box>
               <Box borderBottom>

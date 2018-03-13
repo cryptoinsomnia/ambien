@@ -88,6 +88,7 @@ Post.fragments = {
     fragment PostData on Post {
       id
       title
+      content
       url
       createdAt
       author {
