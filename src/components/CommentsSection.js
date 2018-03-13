@@ -1,9 +1,7 @@
 // @flow
 import React from 'react';
-import {Form, Input} from 'antd';
 
 import {Flex, Island} from './Layout';
-import Button from './Button';
 import CommentList from './CommentList';
 import CreateComment from './CreateComment';
 
