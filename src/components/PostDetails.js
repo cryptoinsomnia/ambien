@@ -7,6 +7,7 @@ import {Spin} from 'antd';
 
 import {Box} from './Layout';
 import Post from './Post';
+import PostContent from './PostContent';
 import {Text} from './Text';
 import {type PostType} from '../types/api';
 
@@ -26,9 +27,14 @@ const PostDetails = ({post, isLoading}: Props) => (
                 Error loading post. Please try again.
               </Text>
             </div>
-          : <Box>
-              <Post {...post} />
-            </Box>}
+          : <React.Fragment>
+              <Box borderBottom>
+                <Post {...post} />
+              </Box>
+              <Box>
+                <PostContent content={post.content} />
+              </Box>
+            </React.Fragment>}
   </React.Fragment>
 );
 
