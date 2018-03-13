@@ -17,6 +17,7 @@ import {colors} from '../util/style';
 // and the ranking (order it appears in the list).
 export type Props = {
   rank: number,
+  noLinks: boolean,
 } & PostType;
 
 const LinkIcon = styled (Icon)`
@@ -26,6 +27,7 @@ const LinkIcon = styled (Icon)`
 
 const Post = ({
   rank,
+  noLinks,
   id,
   url,
   title,
@@ -46,9 +48,11 @@ const Post = ({
         <Col xs={24} lg={19}>
           <Text size="large" bold="true">
             {rank !== undefined && rank !== '' ? `${rank}. ` : ''}
-            <RouterText id={id} to={'post/' + id} size="large" bold="true">
-              {`${title}`}
-            </RouterText>
+            {noLinks
+              ? <Text size="large" bold="true">{`${title}`}</Text>
+              : <RouterText id={id} to={'post/' + id} size="large" bold="true">
+                  {`${title}`}
+                </RouterText>}
             {url &&
               <Link href={url} target="_blank">
                 <LinkIcon type="link" />
@@ -68,7 +72,9 @@ const Post = ({
         </Col>
       </Row>
       <Row type="flex" justify="space-between">
-        <Link>{comments.length} comments</Link>
+        {noLinks
+          ? <Text>{comments.length} comments</Text>
+          : <Link>{comments.length} comments</Link>}
         <Box>
           {tags.map (tag => <Tag key={tag.name}>{tag.displayName}</Tag>)}
         </Box>

@@ -29,9 +29,9 @@ const PostDetails = ({post, isLoading}: Props) => (
             </div>
           : <React.Fragment>
               <Box borderBottom>
-                <Post {...post} />
+                <Post {...post} noLinks />
               </Box>
-              <Box>
+              <Box borderBottom>
                 <PostContent content={post.content} />
               </Box>
             </React.Fragment>}
