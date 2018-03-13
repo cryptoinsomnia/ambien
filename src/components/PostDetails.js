@@ -6,7 +6,7 @@ import {compose} from 'recompose';
 import {Spin} from 'antd';
 
 import {Box} from './Layout';
-import CreateComment from './CreateComment';
+import CommentsSection from './CommentsSection';
 import Post from './Post';
 import PostContent from './PostContent';
 import {Text} from './Text';
@@ -36,7 +36,7 @@ const PostDetails = ({post, isLoading}: Props) => (
                 <PostContent content={post.content} />
               </Box>
               <Box borderBottom>
-                <CreateComment />
+                <CommentsSection />
               </Box>
             </React.Fragment>}
   </React.Fragment>
