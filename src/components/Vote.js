@@ -59,29 +59,40 @@ const Vote = ({
         variables: {
           postId: id,
         },
-        // This doesn't work yet..
-        // optimisticResponse: {
-        //   __typename: 'Mutation',
-        //   voteOnPost: {
-        //     __typename: 'Vote',
-        //     id: Math.round(Math.random() * -1000000),
-        //     voter: {
-        //       __typename: 'User',
-        //       id: loggedInUser.id,
-        //     },
-        //   },
-        // },
-        //   update: (store, { data: { newVote } }) => {
-        //     // Read the data from the cache for this query.
-        //     const data = store.readQuery({ query: Feed });
-        //     console.log(data);
-        //     // Add our channel from the mutation to the end.
-        //     data.posts.filter(post => post.id === id).votes.push(newVote);
-        //     // Write the data back to the cache.
-        //     store.writeQuery({ query: Feed, data });
-        //   },
+        update: (store, { data: { voteOnPost } }) => {
+          // Read the data from the cache for this query.
+          const post = store.readFragment({
+            id: id, // `id` is any id that could be returned by `dataIdFromObject`.
+            fragment: gql`
+              fragment PostFrag on Post {
+                votes {
+                  id
+                  voter {
+                    id
+                  }
+                }
+              }
+            `,
+          });
+          post.votes.push(voteOnPost);
+          store.writeFragment({
+            id: id,
+            fragment: gql`
+              fragment PostFrag on Post {
+                votes {
+                  id
+                  voter {
+                    id
+                  }
+                }
+              }
+            `,
+            data: {
+              votes: post.votes,
+            },
+          });
+        },
       });
-      // console.log('Voted!');
     }
   };
 
@@ -123,6 +134,7 @@ Vote.fragments = {
 const VoteOnPostMutation = gql`
   mutation voteOnPost($postId: ID!) {
     voteOnPost(postId: $postId) {
+      id
       voter {
         id
       }

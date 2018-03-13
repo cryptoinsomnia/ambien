@@ -17,7 +17,9 @@ const httpLink = new HttpLink({ uri: process.env.REACT_APP_API_ENDPOINT });
 
 const client = new ApolloClient({
   link: concat(authMiddleware, httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    dataIdFromObject: object => object.id,
+  }),
 });
 
 export default client;
