@@ -45,7 +45,7 @@ const Post = ({
       <Row type="flex" justify="space-between">
         <Col xs={24} lg={19}>
           <Text size="large" bold="true">
-            {`${rank}. `}
+            {rank !== undefined && rank !== '' ? `${rank}. ` : ''}
             <RouterText id={id} to={'post/' + id} size="large" bold="true">
               {`${title}`}
             </RouterText>

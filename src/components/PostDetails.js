@@ -2,10 +2,10 @@
 import React from 'react';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
-import {Row} from 'antd';
 import {compose} from 'recompose';
 import {Spin} from 'antd';
 
+import {Box} from './Layout';
 import Post from './Post';
 import {Text} from './Text';
 import {type PostType} from '../types/api';
@@ -17,7 +17,7 @@ export type Props = {
 };
 
 const PostDetails = ({post, isLoading}: Props) => (
-  <Row type="flex" align="middle">
+  <React.Fragment>
     {isLoading
       ? <Spin size="large" />
       : post === undefined
@@ -26,13 +26,10 @@ const PostDetails = ({post, isLoading}: Props) => (
                 Error loading post. Please try again.
               </Text>
             </div>
-          : <div>
-              <Text> | id: {post.id} </Text>
-              <Text> | title: {post.title}</Text>
-              <Text> | url: {post.url}</Text>
-              <Text> | createdAt: {post.createdAt}</Text>
-            </div>}
-  </Row>
+          : <Box>
+              <Post {...post} />
+            </Box>}
+  </React.Fragment>
 );
 
 const SinglePostFetch = gql`
