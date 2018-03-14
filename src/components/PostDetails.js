@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import {compose} from 'recompose';
@@ -30,13 +30,13 @@ const PostDetails = ({post, isLoading}: Props) => (
             </div>
           : <React.Fragment>
               <Box borderBottom>
-                <Post noLinks {...post} />
+                <Post rank={-1} noLinks {...post} />
               </Box>
               <Box borderBottom>
                 <PostContent content={post.content} />
               </Box>
               <Box borderBottom>
-                <CommentsSection comments={post.comments} />
+                <CommentsSection post={post} comments={post.comments} />
               </Box>
             </React.Fragment>}
   </React.Fragment>
