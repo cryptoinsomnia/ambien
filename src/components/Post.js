@@ -96,6 +96,8 @@ Post.fragments = {
       }
       comments {
         id
+        content
+        directParentType
       }
       votes {
         id

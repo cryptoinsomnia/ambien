@@ -2,10 +2,16 @@
 import React from 'react';
 import gql from 'graphql-tag';
 
-import { Text } from './Text';
+import {Text} from './Text';
 import Post from './Post';
 
-const Comment = () => <Text>To be made</Text>;
+import {type CommentType} from '../types/api';
+
+type Props = {|
+  comment: CommentType,
+|};
+
+const Comment = ({comment}: Props) => <Text>{comment.content}</Text>;
 
 Comment.fragments = {
   comment: gql`

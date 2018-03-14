@@ -15,7 +15,7 @@ const CommentList = ({comments}: Props) => (
   <React.Fragment>
     {comments.map ((comment, index) => (
       <Box key={comment.id} borderBottom py={2}>
-        <Comment {...comment} />
+        <Comment comment={comment} />
       </Box>
     ))}
   </React.Fragment>

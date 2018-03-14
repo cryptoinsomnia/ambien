@@ -30,13 +30,13 @@ const PostDetails = ({post, isLoading}: Props) => (
             </div>
           : <React.Fragment>
               <Box borderBottom>
-                <Post {...post} noLinks />
+                <Post noLinks {...post} />
               </Box>
               <Box borderBottom>
                 <PostContent content={post.content} />
               </Box>
               <Box borderBottom>
-                <CommentsSection />
+                <CommentsSection comments={post.comments} />
               </Box>
             </React.Fragment>}
   </React.Fragment>
