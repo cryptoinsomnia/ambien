@@ -98,6 +98,9 @@ Post.fragments = {
         id
         content
         directParentType
+        author {
+          username
+        }
       }
       votes {
         id

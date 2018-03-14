@@ -35,6 +35,7 @@ export type CommentType = {
   content: string,
   directParentType: ContentType,
   post: PostType,
+  author: SmallUser,
   comment: CommentType,
   createdAt: string,
 };

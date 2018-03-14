@@ -11,7 +11,9 @@ type Props = {|
   comment: CommentType,
 |};
 
-const Comment = ({comment}: Props) => <Text>{comment.content}</Text>;
+const Comment = ({comment}: Props) => (
+  <Text>{comment.author.username}: {comment.content}</Text>
+);
 
 Comment.fragments = {
   comment: gql`
