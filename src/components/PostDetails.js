@@ -6,7 +6,9 @@ import {compose} from 'recompose';
 import {Spin} from 'antd';
 
 import {Box} from './Layout';
+import CommentsSection from './CommentsSection';
 import Post from './Post';
+import PostContent from './PostContent';
 import {Text} from './Text';
 import {type PostType} from '../types/api';
 
@@ -26,9 +28,17 @@ const PostDetails = ({post, isLoading}: Props) => (
                 Error loading post. Please try again.
               </Text>
             </div>
-          : <Box>
-              <Post {...post} />
-            </Box>}
+          : <React.Fragment>
+              <Box borderBottom>
+                <Post noLinks {...post} />
+              </Box>
+              <Box borderBottom>
+                <PostContent content={post.content} />
+              </Box>
+              <Box borderBottom>
+                <CommentsSection comments={post.comments} />
+              </Box>
+            </React.Fragment>}
   </React.Fragment>
 );
 

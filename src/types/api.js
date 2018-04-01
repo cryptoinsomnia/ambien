@@ -22,6 +22,7 @@ export type PostType = {
   id: string,
   url: string,
   title: string,
+  content: string,
   createdAt: string,
   author: SmallUser,
   comments: Array<CommentType>,
@@ -34,6 +35,7 @@ export type CommentType = {
   content: string,
   directParentType: ContentType,
   post: PostType,
+  author: SmallUser,
   comment: CommentType,
   createdAt: string,
 };

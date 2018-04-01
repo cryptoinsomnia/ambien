@@ -3,17 +3,17 @@ import * as React from 'react';
 
 import Post from './Post';
 
-import { Box } from './Layout';
+import {Box} from './Layout';
 
-import { type PostType } from '../types/api';
+import {type PostType} from '../types/api';
 
 type Props = {|
   posts: Array<PostType>,
 |};
 
-const PostList = ({ posts }: Props) => (
+const PostList = ({posts}: Props) => (
   <React.Fragment>
-    {posts.map((post, index) => (
+    {posts.map ((post, index) => (
       <Box key={post.id} borderBottom py={2}>
         <Post rank={index + 1} {...post} />
       </Box>

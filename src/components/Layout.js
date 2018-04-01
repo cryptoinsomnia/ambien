@@ -1,15 +1,15 @@
 // @flow
 // File for visual primitives components.
 import styled from 'styled-components';
-import { modularScale } from 'polished';
-import { Flex as GridFlex } from 'grid-styled';
-import { space, width } from 'styled-system';
-import { Layout } from 'antd';
+import {modularScale} from 'polished';
+import {Flex as GridFlex} from 'grid-styled';
+import {space, width} from 'styled-system';
+import {Layout} from 'antd';
 
-import { media } from '../util/style';
-import { colors, boxShadow, borderRadius } from '../util/style';
+import {media} from '../util/style';
+import {colors, boxShadow, borderRadius} from '../util/style';
 
-export default styled(Layout)``;
+export default styled (Layout)``;
 
 export const Box = styled.div`
   ${space};
@@ -17,8 +17,7 @@ export const Box = styled.div`
   ${props => props.white && `background: ${colors.whiteBackground}`};
   ${props => props.boxShadow && `box-shadow: ${boxShadow}`};
   ${props => props.maxWidth && `max-width: ${props.maxWidth}`};
-  ${props =>
-    props.borderBottom && `border-bottom: 1px solid ${colors.lightGrey}`};
+  ${props => props.borderBottom && `border-bottom: 1px solid ${colors.lightGrey}`};
 `;
 
 export const Island = styled.section`
@@ -28,10 +27,10 @@ export const Island = styled.section`
   ${space};
   ${width};
   ${props => props.maxWidth && `max-width: ${props.maxWidth}`};
-  padding: ${modularScale(2)};
+  padding: ${modularScale (2)};
   ${media.xs`
-    padding: ${modularScale(0)};
+    padding: ${modularScale (0)};
   `};
 `;
 
-export const Flex = GridFlex.withComponent(Box);
+export const Flex = GridFlex.withComponent (Box);
