@@ -63,8 +63,7 @@ const CREATE_COMMENT_MUTATION = gql`
   mutation CreateComment($content: String!, $postId: ID!) {
     createComment(
       content: $content,
-      postId: $postId, 
-      directParentType: POST
+      postId: $postId,
     ) {
       id
     }
