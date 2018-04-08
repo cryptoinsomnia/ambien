@@ -107,6 +107,9 @@ Post.fragments = {
         author {
           username
         }
+        threadedParentComment {
+          id
+        }
       }
       votes {
         id
