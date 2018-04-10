@@ -51,7 +51,7 @@ const Post = ({
             {noLinks ? (
               <Text size="large" bold="true">{`${title}`}</Text>
             ) : (
-              <RouterText id={id} to={'post/' + id} size="large" bold="true">
+              <RouterText id={id} to={'/post/' + id} size="large" bold="true">
                 {`${title}`}
               </RouterText>
             )}
@@ -98,6 +98,7 @@ Post.fragments = {
       createdAt
       author {
         username
+        profileImageUrl
       }
       comments {
         id

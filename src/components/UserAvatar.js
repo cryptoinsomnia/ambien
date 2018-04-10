@@ -3,7 +3,7 @@ import React, { type Node } from 'react';
 import { Avatar } from 'antd';
 
 import { Flex, Box } from './Layout';
-import { Text } from './Text';
+import { RouterText } from './Text';
 import { colors } from '../util/style';
 import { type SmallUser } from '../types/api';
 import { type Size } from '../types/style';
@@ -11,6 +11,7 @@ import { type Size } from '../types/style';
 export type Props = {
   size: Size,
   children: Node,
+  username: string,
   ...SmallUser,
 };
 
@@ -29,9 +30,9 @@ const UserAvatar = ({
       style={{ backgroundColor: colors.blue }}
     />
     <Box ml="3px">
-      <Text size={size}>
+      <RouterText size={size} to={'/user/' + username}>
         {username}({karma})
-      </Text>
+      </RouterText>
     </Box>
     {children}
   </Flex>
