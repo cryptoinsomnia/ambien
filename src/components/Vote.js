@@ -115,9 +115,6 @@ Vote.fragments = {
       id
       createdAt
       contentType
-      post {
-        id
-      }
       comment {
         id
       }
