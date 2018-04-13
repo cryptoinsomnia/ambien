@@ -113,6 +113,13 @@ Post.fragments = {
         post {
           id
         }
+        votes {
+          id
+          voter {
+            id
+          }
+        }
+        createdAt
       }
       votes {
         id

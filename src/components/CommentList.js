@@ -15,7 +15,13 @@ const CommentList = ({comments}: Props) => (
   <React.Fragment>
     {getSortedCommentsToRender (comments).map (node => (
       <Box key={node.comment.id} borderBottom py={2}>
-        <Comment comment={node.comment} />
+        <Comment
+          key={node.comment.id}
+          comment={node.comment}
+          author={node.comment.author}
+          votes={node.comment.votes}
+          createdAt={node.comment.createdAt}
+        />
       </Box>
     ))}
   </React.Fragment>
