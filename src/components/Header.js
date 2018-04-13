@@ -1,13 +1,12 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { withRouter, type ContextRouter } from 'react-router';
 import { modularScale } from 'polished';
-import { Icon, Row, Col, Avatar } from 'antd';
+import { Icon, Row, Col } from 'antd';
 import { withState, compose } from 'recompose';
 
-import Logo from './Logo';
-import Link from './Link';
+import { Logo } from './Logo';
 import { Box, Flex } from './Layout';
 import Button from './Button';
 import ModalPresenter, { showModal } from './ModalPresenter';
@@ -24,7 +23,6 @@ export type HeaderMenuProps = {
   loggedInUser: SmallUser,
   logout: () => void,
   goToPostPage: () => void,
-  goToUserProfile: () => void,
 };
 
 type HeaderProps = {
@@ -63,31 +61,25 @@ const HeaderMenu = ({
   loggedInUser,
   logout,
   goToPostPage,
-  goToUserProfile,
 }: HeaderMenuProps) => (
   <Flex direction={direction}>
     {direction === 'column' && (
       <Box>
-        <MenuItem onClick={goToUserProfile}>
-          <Avatar
-            src={loggedInUser.profileImageUrl}
-            icon="user"
-            size="small"
-            style={{ backgroundColor: colors.blue }}
-          />{' '}
-          Profile
-        </MenuItem>
         <MenuItem onClick={goToPostPage}>
           <Icon type="plus-circle-o" /> Post
         </MenuItem>
         {loggedInUser ? (
-          <MenuItem onClick={logout}>
-            <Icon /> Log Out
-          </MenuItem>
+          <div>
+            <MenuItem onClick={logout}>
+              <Icon /> Log Out
+            </MenuItem>
+          </div>
         ) : (
-          <MenuItem onClick={showLoginModal}>
-            <Icon type="login" /> Login or Sign Up
-          </MenuItem>
+          <div>
+            <MenuItem onClick={showLoginModal}>
+              <Icon type="login" /> Login or Sign Up
+            </MenuItem>
+          </div>
         )}
       </Box>
     )}
@@ -122,7 +114,6 @@ const Header = ({
     window.location.reload();
   };
   const goToPostPage = () => history.push('/post');
-  const goToUserProfile = () => history.push('/user/' + loggedInUser.username);
   return (
     <Box white boxShadow>
       <Row type="flex" align="middle">
@@ -140,8 +131,8 @@ const Header = ({
         </Col>
         <Col
           lg={{
-            span: 7,
-            offset: 6,
+            span: 8,
+            offset: 5,
           }}
           xs={0}
         >
@@ -155,23 +146,15 @@ const Header = ({
             Post
           </Button>
           {loggedInUser ? (
-            <React.Fragment>
-              <Button onClick={logout} size="large" m={1}>
-                Logout
-              </Button>
-              <Link href={'/user/' + loggedInUser.username}>
-                <Avatar
-                  src={loggedInUser.profileImageUrl}
-                  icon="user"
-                  size="large"
-                  style={{ backgroundColor: colors.blue }}
-                />
-              </Link>
-            </React.Fragment>
-          ) : (
-            <Button onClick={showLoginModal} size="large" m={1}>
-              Login or Sign Up
+            <Button onClick={logout} size="large" m={1}>
+              Logout
             </Button>
+          ) : (
+            <span>
+              <Button onClick={showLoginModal} size="large" m={1}>
+                Login or Sign Up
+              </Button>
+            </span>
           )}
         </Col>
       </Row>
@@ -185,7 +168,6 @@ const Header = ({
               loggedInUser={loggedInUser}
               logout={logout}
               goToPostPage={goToPostPage}
-              goToUserProfile={goToUserProfile}
             />
           </Col>
         </Row>
