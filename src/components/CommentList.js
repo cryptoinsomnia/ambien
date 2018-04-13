@@ -3,9 +3,7 @@ import * as React from 'react';
 import * as Tree from 't';
 
 import Comment from './Comment';
-
 import {Box} from './Layout';
-import {Text} from './Text';
 
 import {type CommentType} from '../types/api';
 
@@ -16,7 +14,9 @@ type Props = {|
 const CommentList = ({comments}: Props) => (
   <React.Fragment>
     {getSortedCommentsToRender (comments).map (node => (
-      <Comment key={node.comment.id} comment={node.comment} />
+      <Box key={node.comment.id} borderBottom py={2}>
+        <Comment key={node.comment.id} comment={node.comment} />
+      </Box>
     ))}
   </React.Fragment>
 );
@@ -28,6 +28,7 @@ CommentList.defaultProps = {
 var getSortedCommentsToRender = function (comments) {
   var commentsToRender = [];
   Tree.dfs (getTreeGraphOfComments (comments), function (node, par) {
+    console.log (node);
     commentsToRender.push ({
       comment: node,
     });

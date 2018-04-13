@@ -104,6 +104,9 @@ Post.fragments = {
         threadedParentComment {
           id
         }
+        post {
+          id
+        }
       }
       votes {
         id
