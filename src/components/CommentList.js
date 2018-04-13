@@ -53,7 +53,8 @@ var getTreeGraphOfComments = function (arr) {
 
       if (
         mappedComment.directParentType === 'COMMENT' &&
-        mappedComment.threadedParentComment
+        mappedComment.threadedParentComment &&
+        mappedComment.threadedParentComment[0]
       ) {
         mappedArr[mappedComment.threadedParentComment[0].id].children.push (
           mappedComment
