@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
 import Button from './Button';
-import { withRouter } from 'react-router';
-import { graphql, compose, type MutationFunc } from 'react-apollo';
+import { graphql, type MutationFunc } from 'react-apollo';
 import gql from 'graphql-tag';
 
 export type Props = {|
@@ -54,7 +53,6 @@ const AUTHENTICATE_FACEBOOK_USER = gql`
   }
 `;
 
-export default compose(
-  graphql(AUTHENTICATE_FACEBOOK_USER, { name: 'authenticateUserMutation' }),
-  withRouter
-)(FacebookLogin);
+export default graphql(AUTHENTICATE_FACEBOOK_USER, {
+  name: 'authenticateUserMutation',
+})(FacebookLogin);
