@@ -140,8 +140,8 @@ const Header = ({
         </Col>
         <Col
           lg={{
-            span: 9,
-            offset: 4,
+            span: 7,
+            offset: 6,
           }}
           xs={0}
         >
