@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import {Row} from 'antd';
 import gql from 'graphql-tag';
 
@@ -14,13 +14,17 @@ type Props = {|
 |};
 
 const Comment = ({comment}: Props) => (
-  <Row type="flex" justify="start">
-    <Text>{comment.author.username}: {comment.content}</Text>
-    <CreateCommentOnComment
-      postId={comment.post.id}
-      parentCommentId={comment.id}
-    />
-  </Row>
+  <React.Fragment>
+    <Row type="flex" justify="start">
+      <Text>{comment.author.username}: {comment.content}</Text>
+    </Row>
+    <Row type="flex" justify="start">
+      <CreateCommentOnComment
+        postId={comment.post.id}
+        parentCommentId={comment.id}
+      />
+    </Row>
+  </React.Fragment>
 );
 
 Comment.fragments = {

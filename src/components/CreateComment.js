@@ -46,7 +46,7 @@ const CreateComment = ({createCommentMutation, form, post}: Props) => {
               message: 'Please write a comment...',
             },
           ],
-        }) (<Input />)}
+        }) (<Input placeholder="Write a comment..." />)}
       </Form.Item>
       <Form.Item>
         <Button size="large" type="primary" htmlType="submit">
