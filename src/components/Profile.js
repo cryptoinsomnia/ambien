@@ -171,6 +171,9 @@ const User = gql`
       }
       votes {
         ...VoteData
+        post {
+          ...PostData
+        }
       }
     }
   }
