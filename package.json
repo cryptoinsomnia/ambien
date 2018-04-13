@@ -28,24 +28,18 @@
     "flow-bin": "^0.61.0",
     "flow-typed": "^2.2.3",
     "husky": "^0.14.3",
-    "lint-staged": "^6.0.0",
     "prettier": "^1.9.2",
     "prettier-eslint": "^8.6.2",
+    "prettier-eslint-cli": "^4.7.1",
     "react-app-rewire-less": "^2.1.0",
     "react-app-rewired": "^1.4.0",
     "react-scripts": "1.0.17"
   },
-  "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier",
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "scripts": {
-    "precommit": "lint-staged && flow",
+    "precommit": "yarn format && flow && git add -u",
     "flow": "flow",
     "flow-typed": "flow-typed",
+    "format": "prettier-eslint \"src/**/*.js\"",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
