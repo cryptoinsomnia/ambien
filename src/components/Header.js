@@ -6,7 +6,7 @@ import { modularScale } from 'polished';
 import { Icon, Row, Col, Avatar } from 'antd';
 import { withState, compose } from 'recompose';
 
-import Logo from './Logo';
+import { Logo } from './Logo';
 import Link from './Link';
 import { Box, Flex } from './Layout';
 import Button from './Button';

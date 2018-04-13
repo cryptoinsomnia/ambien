@@ -11,6 +11,7 @@ const Feedback = () => (
       </Box>
       <Box>
         <iframe
+          title="feedback"
           src="https://docs.google.com/forms/d/e/1FAIpQLScRgWx2SD9FuCfUQu_pFUcvVHncp41Uh9DW4ebb3tUjm_s7bw/viewform?embedded=true"
           width="602"
           height="1100"
