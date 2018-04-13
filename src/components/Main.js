@@ -53,7 +53,7 @@ Main.defaultProps = {
 
 // The AllPosts graphql query
 export const Feed = gql`
-  query Feed($first: Int!, $orderBy: PostOrderByInput!) {
+  query Feed($first: Int!, $orderBy: PostOrderByInput) {
     feed(orderBy: $orderBy, first: $first) {
       ...PostData
     }
@@ -68,7 +68,7 @@ const withData = graphql(Feed, {
     variables: {
       first: 10,
       // Just a POC, the actual logic will be different.
-      orderBy: feedType === 'trending' ? 'createdAt_DESC' : 'createdAt_ASC',
+      orderBy: feedType === 'trending' ? undefined : 'createdAt_DESC',
     },
     notifyOnNetworkStatusChange: true,
   }),
