@@ -39,6 +39,7 @@ export type CommentType = {
   author: SmallUser,
   comment: CommentType,
   createdAt: string,
+  votes: Array<VoteType>,
 };
 
 export type VoteType = {
