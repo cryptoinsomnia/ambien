@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import {Row} from 'antd';
 import gql from 'graphql-tag';
 
 import {Text} from './Text';
@@ -12,7 +13,9 @@ type Props = {|
 |};
 
 const Comment = ({comment}: Props) => (
-  <Text>{comment.author.username}: {comment.content}</Text>
+  <Row type="flex" justify="start">
+    <Text>{comment.author.username}: {comment.content}</Text>
+  </Row>
 );
 
 Comment.fragments = {
