@@ -116,6 +116,7 @@ Post.defaultProps = {
   tags: [{name: 'btc', displayName: 'Bitcoin'}],
   votes: [],
   comments: [],
+  noLinks: false,
 };
 
 export default Post;

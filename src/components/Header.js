@@ -22,6 +22,7 @@ export type HeaderMenuProps = {
   showLoginModal: () => void,
   loggedInUser: SmallUser,
   logout: () => void,
+  goToPostPage: () => void,
 };
 
 type HeaderProps = {
@@ -59,11 +60,12 @@ const HeaderMenu = ({
   showLoginModal,
   loggedInUser,
   logout,
+  goToPostPage,
 }: HeaderMenuProps) => (
   <Flex direction={direction}>
     {direction === 'column' && (
       <Box>
-        <MenuItem>
+        <MenuItem onClick={goToPostPage}>
           <Icon type="plus-circle-o" /> Post
         </MenuItem>
         {loggedInUser ? (
@@ -111,6 +113,7 @@ const Header = ({
     localStorage.removeItem('graphcoolToken');
     window.location.reload();
   };
+  const goToPostPage = () => history.push('/post');
   return (
     <Box white boxShadow>
       <Row type="flex" align="middle">
@@ -133,7 +136,13 @@ const Header = ({
           }}
           xs={0}
         >
-          <Button size="large" m={1} icon="plus-circle-o" type="primary">
+          <Button
+            size="large"
+            m={1}
+            icon="plus-circle-o"
+            type="primary"
+            onClick={goToPostPage}
+          >
             Post
           </Button>
           {loggedInUser ? (
@@ -158,6 +167,7 @@ const Header = ({
               direction="column"
               loggedInUser={loggedInUser}
               logout={logout}
+              goToPostPage={goToPostPage}
             />
           </Col>
         </Row>
