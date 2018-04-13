@@ -1,17 +1,17 @@
 // @flow
 import React from 'react';
-import { Tag, Row, Col, Icon } from 'antd';
+import {Tag, Row, Col, Icon} from 'antd';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
 
-import { Box } from './Layout';
-import { Text, RouterText } from './Text';
+import {Box} from './Layout';
+import {Text, RouterText} from './Text';
 import UserAvatar from './UserAvatar';
 import Vote from './Vote';
 import Link from './Link';
-import { type PostType } from '../types/api';
-import { colors } from '../util/style';
+import {type PostType} from '../types/api';
+import {colors} from '../util/style';
 
 // The props to a Post are everything in the FeedPost API object
 // and the ranking (order it appears in the list).
@@ -20,7 +20,7 @@ export type Props = {
   noLinks: boolean,
 } & PostType;
 
-const LinkIcon = styled(Icon)`
+const LinkIcon = styled (Icon)`
   color: ${colors.black};
   margin-left: 5px;
 `;
@@ -48,18 +48,15 @@ const Post = ({
         <Col xs={24} lg={19}>
           <Text size="large" bold="true">
             {rank !== undefined && rank !== '' && rank > 0 ? `${rank}. ` : ''}
-            {noLinks ? (
-              <Text size="large" bold="true">{`${title}`}</Text>
-            ) : (
-              <RouterText id={id} to={'/post/' + id} size="large" bold="true">
-                {`${title}`}
-              </RouterText>
-            )}
-            {url && (
+            {noLinks
+              ? <Text size="large" bold="true">{`${title}`}</Text>
+              : <RouterText id={id} to={'/post/' + id} size="large" bold="true">
+                  {`${title}`}
+                </RouterText>}
+            {url &&
               <Link href={url} target="_blank">
                 <LinkIcon type="link" />
-              </Link>
-            )}
+              </Link>}
           </Text>
         </Col>
         <Col lg={5}>
@@ -67,7 +64,7 @@ const Post = ({
             <UserAvatar {...author} size="small">
               <Box ml={1}>
                 <Text italic size="small">
-                  {`${distanceInWordsToNow(new Date(createdAt))} ago`}
+                  {`${distanceInWordsToNow (new Date (createdAt))} ago`}
                 </Text>
               </Box>
             </UserAvatar>
@@ -75,13 +72,11 @@ const Post = ({
         </Col>
       </Row>
       <Row type="flex" justify="space-between">
-        {noLinks ? (
-          <Text>{comments.length} comments</Text>
-        ) : (
-          <Link>{comments.length} comments</Link>
-        )}
+        {noLinks
+          ? <Text>{comments.length} comments</Text>
+          : <Link>{comments.length} comments</Link>}
         <Box>
-          {tags.map(tag => <Tag key={tag.name}>{tag.displayName}</Tag>)}
+          {tags.map (tag => <Tag key={tag.name}>{tag.displayName}</Tag>)}
         </Box>
       </Row>
     </Col>
@@ -99,6 +94,7 @@ Post.fragments = {
       author {
         username
         profileImageUrl
+        karma
       }
       comments {
         id
@@ -106,6 +102,7 @@ Post.fragments = {
         directParentType
         author {
           username
+          karma
         }
         threadedParentComment {
           id
@@ -132,7 +129,7 @@ Post.fragments = {
 };
 
 Post.defaultProps = {
-  tags: [{ name: 'btc', displayName: 'Bitcoin' }],
+  tags: [{name: 'btc', displayName: 'Bitcoin'}],
   votes: [],
   comments: [],
   noLinks: false,
