@@ -5,6 +5,7 @@ import * as Tree from 't';
 import Comment from './Comment';
 
 import {Box} from './Layout';
+import {Text} from './Text';
 
 import {type CommentType} from '../types/api';
 
