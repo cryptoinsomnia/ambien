@@ -51,11 +51,12 @@ var getTreeGraphOfComments = function (arr) {
       mappedComment = mappedArr[id];
       // If the element is not at the root level, or if it doesn't have a properly
       // formed parent comment, add it to the root level
+
       if (
         mappedComment.directParentType === 'COMMENT' &&
         mappedComment.threadedParentComment
       ) {
-        mappedArr[mappedComment.threadedParentComment.id].children.push (
+        mappedArr[mappedComment.threadedParentComment[0].id].children.push (
           mappedComment
         );
       } else {
