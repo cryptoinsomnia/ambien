@@ -50,10 +50,10 @@ const CreateCommentOnComment = ({
           rules: [
             {
               required: true,
-              message: 'Please write a comment...',
+              message: 'Please write a reply...',
             },
           ],
-        }) (<Input />)}
+        }) (<Input placeholder="Reply..." />)}
       </Form.Item>
       <Form.Item>
         <Button size="large" type="primary" htmlType="submit">

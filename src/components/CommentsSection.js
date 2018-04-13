@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 
-import {Flex, Island} from './Layout';
+import {Box, Flex, Island} from './Layout';
 import CommentList from './CommentList';
 import CreateComment from './CreateComment';
 import {type CommentType} from '../types/api';
@@ -14,8 +14,10 @@ type Props = {|
 
 const CommentsSection = ({post, comments}: Props) => (
   <Flex align="center" direction="column">
-    <Island my={3} width={[0.95, 0.95, 0.5, 0.4]}>
-      <CreateComment post={post} />
+    <Island my={3} width={[0.95, 0.95, 0.8, 0.8]}>
+      <Box borderBottom py={2}>
+        <CreateComment post={post} />
+      </Box>
       <CommentList comments={comments} />
     </Island>
   </Flex>

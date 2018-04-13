@@ -28,7 +28,6 @@ CommentList.defaultProps = {
 var getSortedCommentsToRender = function (comments) {
   var commentsToRender = [];
   Tree.dfs (getTreeGraphOfComments (comments), function (node, par) {
-    console.log (node);
     commentsToRender.push ({
       comment: node,
     });
