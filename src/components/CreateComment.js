@@ -57,8 +57,6 @@ const CreateComment = ({ createCommentMutation, form, post }: Props) => {
   );
 };
 
-// For now, assume that all comments are on posts. TODO add ability
-// to comment on comments.
 const CREATE_COMMENT_MUTATION = gql`
   mutation CreateComment($content: String!, $postId: ID!) {
     createComment(content: $content, postId: $postId) {
