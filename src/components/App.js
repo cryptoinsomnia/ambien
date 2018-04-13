@@ -1,6 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {ApolloProvider} from 'react-apollo';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ApolloProvider } from 'react-apollo';
 
 import Layout from './Layout';
 import Main from './Main';
@@ -11,6 +11,8 @@ import PostDetails from './PostDetails';
 import Profile from './Profile';
 
 import client from '../util/client';
+import Privacy from './Privacy';
+import Feedback from './Feedback';
 
 const App = () => (
   <ApolloProvider client={client}>
@@ -30,6 +32,8 @@ const App = () => (
             path="/post/:id"
             render={id => <PostDetails id={id.match.params.id} />}
           />
+          <Route exact path="/privacy" component={Privacy} />
+          <Route exact path="/feedback" component={Feedback} />
           <Footer />
         </div>
       </Router>

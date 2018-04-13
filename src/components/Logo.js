@@ -22,7 +22,7 @@ type LogoIconProps = {|
   scale: number,
 |};
 
-const LogoIcon = ({ color, scale }: LogoIconProps) => (
+export const LogoIcon = ({ color, scale }: LogoIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={scale * 145}
@@ -44,26 +44,25 @@ LogoIcon.defaultProps = {
 
 type Props = {
   to: string,
-}
+};
 
 // Note: this is responsive for Navbar.
 // Might require refactor if used in multiple places.
-const LogoCore = 
-  <Flex align="center" justify="center" >
+const LogoCore = (
+  <Flex align="center" justify="center">
     <LogoIcon />
     <LogoText>CryptoInsomnia</LogoText>
-  </Flex>;
-
-const Logo = ({ to }: Props) => (
-  <Flex>
-    {to != null ? (
-      <Link href={to} underlineTextDecoration={false} >
-        {LogoCore}
-      </Link>
-    ) : (
-      {LogoCore}
-    )}
   </Flex>
 );
 
-export default Logo;
+export const Logo = ({ to }: Props) => (
+  <Flex>
+    {to != null ? (
+      <Link href={to} underlineTextDecoration={false}>
+        {LogoCore}
+      </Link>
+    ) : (
+      { LogoCore }
+    )}
+  </Flex>
+);
