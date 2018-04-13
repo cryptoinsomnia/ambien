@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import {Tag, Row, Col, Icon} from 'antd';
+import {Row, Col} from 'antd';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import gql from 'graphql-tag';
 
@@ -10,6 +10,7 @@ import Vote from './Vote';
 import UserAvatar from './UserAvatar';
 import CreateCommentOnComment from './CreateCommentOnComment';
 import Post from './Post';
+import {colors} from '../util/style';
 
 import {type CommentType, type SmallUser, type VoteType} from '../types/api';
 
@@ -22,7 +23,7 @@ type Props = {|
 
 const Comment = ({comment, createdAt, author, votes}: Props) => (
   <React.Fragment>
-    <Row type="flex" align="middle">
+    <Row type="flex" align="middle" style={{backgroundColor: colors.lightGrey}}>
       <Col lg={1} xs={4}>
         <Row type="flex" align="middle" justify="center">
           <Vote id={comment.id} type="COMMENT" votes={votes} />

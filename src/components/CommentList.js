@@ -14,7 +14,12 @@ type Props = {|
 const CommentList = ({comments}: Props) => (
   <React.Fragment>
     {getSortedCommentsToRender (comments).map (node => (
-      <Box key={node.comment.id} borderBottom py={2}>
+      <Box
+        key={node.comment.id}
+        borderBottom
+        py={2}
+        marginLeft={`${node.level * 100}px`}
+      >
         <Comment
           key={node.comment.id}
           comment={node.comment}
@@ -33,9 +38,21 @@ CommentList.defaultProps = {
 
 var getSortedCommentsToRender = function (comments) {
   var commentsToRender = [];
+  var threadedLevelsStack = [];
   Tree.dfs (getTreeGraphOfComments (comments), function (node, par) {
+    if (node.threadedParentComment.length == 0) {
+      threadedLevelsStack.length = 0;
+    } else if (
+      threadedLevelsStack.includes (node.threadedParentComment[0].id)
+    ) {
+      threadedLevelsStack.length =
+        threadedLevelsStack.indexOf (node.threadedParentComment[0].id) + 1;
+    } else {
+      threadedLevelsStack.push (node.threadedParentComment[0].id);
+    }
     commentsToRender.push ({
       comment: node,
+      level: threadedLevelsStack.length,
     });
   });
   return commentsToRender;

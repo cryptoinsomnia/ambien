@@ -56,8 +56,8 @@ const CreateCommentOnComment = ({
         }) (<Input placeholder="Reply..." />)}
       </Form.Item>
       <Form.Item>
-        <Button size="large" type="primary" htmlType="submit">
-          Submit
+        <Button size="small" type="primary" htmlType="submit">
+          Reply
         </Button>
       </Form.Item>
     </Form>
