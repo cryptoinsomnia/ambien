@@ -16,7 +16,7 @@ type Props = {|
 const CommentList = ({comments}: Props) => (
   <React.Fragment>
     {getSortedCommentsToRender (comments).map (node => (
-      <Text key={node.name}>{node.name}</Text>
+      <Comment key={node.comment.id} comment={node.comment} />
     ))}
   </React.Fragment>
 );
@@ -29,7 +29,7 @@ var getSortedCommentsToRender = function (comments) {
   var commentsToRender = [];
   Tree.dfs (getTreeGraphOfComments (comments), function (node, par) {
     commentsToRender.push ({
-      name: node.name,
+      comment: node,
     });
   });
   return commentsToRender;
