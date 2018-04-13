@@ -30,7 +30,7 @@ var getSortedCommentsToRender = function (comments) {
   var commentsToRender = [];
   Tree.dfs (getTreeGraphOfComments (comments), function (node, par) {
     commentsToRender.push ({
-      name: node.name,
+      comment: node,
     });
   });
   return commentsToRender;
