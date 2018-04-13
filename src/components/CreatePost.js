@@ -46,13 +46,15 @@ class CreatePost extends Component<Props, State> {
         this.props
           .createPost({ variables: value })
           .then(({ data }) => {
-            this.setState({ isLoading: false, didError: false }, () => {
+            this.setState({ didError: false }, () => {
               this.props.history.push(`/post/${data.createPost.id}`);
             });
           })
           .catch(() => {
-            this.setState({ isLoading: false, didError: true });
+            this.setState({ didError: true });
           });
+      } else {
+        this.setState({ isLoading: false });
       }
     });
   };
