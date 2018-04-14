@@ -10,8 +10,9 @@ import {Text, RouterText} from './Text';
 import UserAvatar from './UserAvatar';
 import Vote from './Vote';
 import Link from './Link';
-import {type PostType} from '../types/api';
-import {colors} from '../util/style';
+import { idToDisplayName } from '../constants/tags';
+import { type PostType } from '../types/api';
+import { colors } from '../util/style';
 
 // The props to a Post are everything in the FeedPost API object
 // and the ranking (order it appears in the list).
@@ -76,7 +77,10 @@ const Post = ({
           ? <Text>{comments.length} comments</Text>
           : <Link>{comments.length} comments</Link>}
         <Box>
-          {tags.map (tag => <Tag key={tag.name}>{tag.displayName}</Tag>)}
+          {tags.map(tag => {
+            const displayName = idToDisplayName[tag];
+            return displayName ? <Tag key={tag}>{displayName}</Tag> : null;
+          })}
         </Box>
       </Row>
     </Col>
@@ -91,6 +95,7 @@ Post.fragments = {
       content
       url
       createdAt
+      tags
       author {
         username
         profileImageUrl
@@ -130,6 +135,7 @@ Post.fragments = {
 
 Post.defaultProps = {
   tags: [{name: 'btc', displayName: 'Bitcoin'}],
+  tags: [],
   votes: [],
   comments: [],
   noLinks: false,
