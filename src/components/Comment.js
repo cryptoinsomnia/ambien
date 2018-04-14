@@ -23,18 +23,22 @@ type Props = {|
 
 const Comment = ({comment, createdAt, author, votes}: Props) => (
   <React.Fragment>
-    <Row type="flex" align="middle" style={{backgroundColor: colors.lightGrey}}>
+    <Row
+      type="flex"
+      align="middle"
+      style={{backgroundColor: colors.superLightGrey}}
+    >
       <Col lg={1} xs={4}>
         <Row type="flex" align="middle" justify="center">
           <Vote id={comment.id} type="COMMENT" votes={votes} />
         </Row>
       </Col>
-      <Col lg={23} xs={20}>
+      <Col lg={22} xs={10}>
         <Row type="flex" justify="space-between">
-          <Col xs={24} lg={19}>
+          <Col xs={14} lg={16}>
             <Text>{comment.author.username}: {comment.content}</Text>
           </Col>
-          <Col lg={5}>
+          <Col lg={8}>
             <Row type="flex" justify="end">
               <UserAvatar {...author} size="small">
                 <Box ml={1}>
@@ -46,14 +50,19 @@ const Comment = ({comment, createdAt, author, votes}: Props) => (
             </Row>
           </Col>
         </Row>
-        <Row type="flex" justify="space-between">
-          <Box>
-            <CreateCommentOnComment
-              postId={comment.post.id}
-              parentCommentId={comment.id}
-            />
-          </Box>
-        </Row>
+
+      </Col>
+    </Row>
+    <Row
+      type="flex"
+      align="right"
+      style={{backgroundColor: colors.superLightGrey}}
+    >
+      <Col lg={24} xs={14}>
+        <CreateCommentOnComment
+          postId={comment.post.id}
+          parentCommentId={comment.id}
+        />
       </Col>
     </Row>
   </React.Fragment>

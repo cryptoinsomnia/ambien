@@ -37,7 +37,7 @@ const CreateComment = ({createCommentMutation, form, post}: Props) => {
   };
   const {getFieldDecorator} = form;
   return (
-    <Form layout="vertical" onSubmit={_handleCreateComment}>
+    <Form layout="inline" onSubmit={_handleCreateComment}>
       <Form.Item>
         {getFieldDecorator ('comment', {
           rules: [

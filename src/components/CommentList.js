@@ -17,8 +17,8 @@ const CommentList = ({comments}: Props) => (
       <Box
         key={node.comment.id}
         borderBottom
-        py={2}
-        marginLeft={`${node.level * 100}px`}
+        py={1}
+        marginLeft={`${node.level * 50}px`}
       >
         <Comment
           key={node.comment.id}
