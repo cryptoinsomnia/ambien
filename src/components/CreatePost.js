@@ -12,7 +12,7 @@ import gql from 'graphql-tag';
 import { type FormProp } from '../types/form';
 
 const tagNodes = tags.map(tag => (
-  <Select.Option key={tag.name}>{tag.displayName}</Select.Option>
+  <Select.Option key={tag.id}>{tag.displayName}</Select.Option>
 ));
 
 type Props = {
@@ -141,8 +141,13 @@ class CreatePost extends Component<Props, State> {
 }
 
 const CreatePostMutation = gql`
-  mutation CreatePostMutation($title: String!, $url: String, $content: String) {
-    createPost(title: $title, url: $url, content: $content) {
+  mutation CreatePostMutation(
+    $title: String!
+    $url: String
+    $content: String
+    $tags: [String!]
+  ) {
+    createPost(title: $title, url: $url, content: $content, tags: $tags) {
       id
     }
   }

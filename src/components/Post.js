@@ -10,6 +10,7 @@ import { Text, RouterText } from './Text';
 import UserAvatar from './UserAvatar';
 import Vote from './Vote';
 import Link from './Link';
+import { idToDisplayName } from '../constants/tags';
 import { type PostType } from '../types/api';
 import { colors } from '../util/style';
 
@@ -81,7 +82,10 @@ const Post = ({
           <Link>{comments.length} comments</Link>
         )}
         <Box>
-          {tags.map(tag => <Tag key={tag.name}>{tag.displayName}</Tag>)}
+          {tags.map(tag => {
+            const displayName = idToDisplayName[tag];
+            return displayName ? <Tag key={tag}>{displayName}</Tag> : null;
+          })}
         </Box>
       </Row>
     </Col>
@@ -96,6 +100,7 @@ Post.fragments = {
       content
       url
       createdAt
+      tags
       author {
         username
         profileImageUrl
@@ -119,7 +124,7 @@ Post.fragments = {
 };
 
 Post.defaultProps = {
-  tags: [{ name: 'btc', displayName: 'Bitcoin' }],
+  tags: [],
   votes: [],
   comments: [],
   noLinks: false,

@@ -13,11 +13,6 @@ export type SmallUser = {
   profileImageUrl: string,
 };
 
-export type Tag = {
-  name: string,
-  displayName: string,
-};
-
 export type PostType = {
   id: string,
   url: string,
@@ -27,7 +22,7 @@ export type PostType = {
   author: SmallUser,
   comments: Array<CommentType>,
   votes: Array<VoteType>,
-  tags: Array<Tag>,
+  tags: Array<string>,
 };
 
 export type CommentType = {
