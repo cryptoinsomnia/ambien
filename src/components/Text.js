@@ -4,12 +4,12 @@
 // on the site.
 import styled from 'styled-components';
 
-import { Link as RouterLink } from 'react-router-dom';
-import { colors } from '../util/style';
+import {Link as RouterLink} from 'react-router-dom';
+import {colors} from '../util/style';
 
-import { type Size } from '../types/style';
+import {type Size} from '../types/style';
 
-const fontSizeForSize: { [Size]: number } = {
+const fontSizeForSize: {[Size]: number} = {
   small: 12,
   medium: 14,
   large: 18,
@@ -39,4 +39,4 @@ Text.defaultProps = {
   color: `${colors.darkGrey}`,
 };
 
-export const RouterText = Text.withComponent(RouterLink);
+export const RouterText = Text.withComponent (RouterLink);

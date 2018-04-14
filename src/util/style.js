@@ -1,9 +1,10 @@
 // @flow
-import { css } from 'styled-components';
+import {css} from 'styled-components';
 
 // Note some of these colors are referenced in config-overrides.js as well.
 export const colors = {
   whiteBackground: '#fff',
+  superLightGrey: 'rgba(0, 0, 0, 0.05)',
   lightGrey: 'rgba(0, 0, 0, 0.25)',
   grey: 'rgba(0, 0, 0, 0.45)',
   darkGrey: 'rgba(0, 0, 0, 0.65)',
@@ -25,13 +26,13 @@ const sizes = {
 };
 
 // iterate through the sizes and create a media template
-export const media = Object.keys(sizes).reduce((accumulator, label) => {
+export const media = Object.keys (sizes).reduce ((accumulator, label) => {
   // use em in breakpoints to work properly cross-browser and support users
   // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
   const emSize = sizes[label] / 16;
   accumulator[label] = (...args: any) => css`
     @media (max-width: ${emSize}em) {
-      ${css(...args)};
+      ${css (...args)};
     }
   `;
   return accumulator;

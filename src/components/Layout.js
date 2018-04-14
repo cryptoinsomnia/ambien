@@ -18,6 +18,9 @@ export const Box = styled.div`
   ${props => props.boxShadow && `box-shadow: ${boxShadow}`};
   ${props => props.maxWidth && `max-width: ${props.maxWidth}`};
   ${props => props.borderBottom && `border-bottom: 1px solid ${colors.lightGrey}`};
+  ${props => props.heavyBorderBottom && `border-bottom: 3px solid ${colors.darkGrey}`};
+  ${props => props.marginLeft && `margin-left: ${props.marginLeft}`};
+  ${props => props.marginRight && `margin-left: 10px`};
 `;
 
 export const Island = styled.section`

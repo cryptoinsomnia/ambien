@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import {compose} from 'recompose';
 import {Spin} from 'antd';
 
-import {Box} from './Layout';
+import {Box, Flex, Island} from './Layout';
 import CommentsSection from './CommentsSection';
 import Post from './Post';
 import PostContent from './PostContent';
@@ -29,15 +29,20 @@ const PostDetails = ({post, isLoading}: Props) => (
               </Text>
             </div>
           : <React.Fragment>
-              <Box borderBottom>
-                <Post rank={-1} noLinks {...post} />
-              </Box>
-              <Box borderBottom>
-                <PostContent content={post.content} />
-              </Box>
-              <Box borderBottom>
-                <CommentsSection post={post} comments={post.comments} />
-              </Box>
+              <Flex align="center" direction="column">
+                <Island my={3} width={[0.95, 0.95, 0.8, 0.8]}>
+                  <Box borderBottom py={2}>
+                    <Post rank={-1} noLinks {...post} />
+                  </Box>
+                  <Box borderBottom>
+                    <PostContent content={post.content} />
+                  </Box>
+                  <Box heavyBorderBottom>
+                    <CommentsSection post={post} comments={post.comments} />
+                  </Box>
+                </Island>
+              </Flex>
+
             </React.Fragment>}
   </React.Fragment>
 );
