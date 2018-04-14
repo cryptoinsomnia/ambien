@@ -29,10 +29,12 @@ export type CommentType = {
   id: string,
   content: string,
   directParentType: ContentType,
+  threadedParentComment: CommentType,
   post: PostType,
   author: SmallUser,
   comment: CommentType,
   createdAt: string,
+  votes: Array<VoteType>,
 };
 
 export type VoteType = {
