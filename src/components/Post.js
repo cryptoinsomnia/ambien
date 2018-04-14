@@ -75,7 +75,11 @@ const Post = ({
       <Row type="flex" justify="space-between">
         {noLinks
           ? <Text>{comments.length} comments</Text>
-          : <Link>{comments.length} comments</Link>}
+          : <Link>
+              <RouterText id={id} to={'/post/' + id} size="medium">
+                {comments.length} comments
+              </RouterText>
+            </Link>}
         <Box>
           {tags.map(tag => {
             const displayName = idToDisplayName[tag];
@@ -134,7 +138,6 @@ Post.fragments = {
 };
 
 Post.defaultProps = {
-  tags: [{name: 'btc', displayName: 'Bitcoin'}],
   tags: [],
   votes: [],
   comments: [],
