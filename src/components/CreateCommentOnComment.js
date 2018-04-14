@@ -43,9 +43,17 @@ const CreateCommentOnComment = ({
     });
   };
   const {getFieldDecorator} = form;
+  const formItemLayout = {
+    labelCol: {
+      lg: {span: 24},
+    },
+    wrapperCol: {
+      lg: {span: 24},
+    },
+  };
   return (
-    <Form layout="vertical" onSubmit={_handleCreateCommentOnComment}>
-      <Form.Item>
+    <Form layout="inline" onSubmit={_handleCreateCommentOnComment}>
+      <Form.Item {...formItemLayout}>
         {getFieldDecorator ('comment', {
           rules: [
             {
