@@ -9,7 +9,6 @@ import { Text } from './Text';
 import Vote from './Vote';
 import UserAvatar from './UserAvatar';
 import CreateCommentOnComment from './CreateCommentOnComment';
-import Post from './Post';
 import { colors } from '../util/style';
 
 import { type CommentType, type SmallUser, type VoteType } from '../types/api';
@@ -88,7 +87,6 @@ Comment.fragments = {
       }
       createdAt
     }
-    ${Post.fragments.post}
   `,
 };
 

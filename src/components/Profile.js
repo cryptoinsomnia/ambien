@@ -5,8 +5,6 @@ import gql from 'graphql-tag';
 import { compose } from 'recompose';
 
 import Post from './Post';
-import Comment from './Comment';
-import Vote from './Vote';
 
 import { Tabs, Spin } from 'antd';
 import { Flex, Box, Island } from './Layout';
@@ -175,7 +173,6 @@ const User = gql`
         }
       }
       comments {
-        ...CommentData
         post {
           ...PostData
           comments {
@@ -190,7 +187,6 @@ const User = gql`
         }
       }
       votes {
-        ...VoteData
         post {
           ...PostData
           votes {
@@ -207,8 +203,6 @@ const User = gql`
     }
   }
   ${Post.fragments.post}
-  ${Comment.fragments.comment}
-  ${Vote.fragments.vote}
 `;
 
 const withData = graphql(User, {
