@@ -8,6 +8,7 @@ import {
 } from 'react-router';
 import { Modal } from 'antd';
 import URI from 'jsuri';
+import { Flex } from './Layout';
 
 import { locationToUri } from '../util/uri';
 import FacebookLogin from './FacebookLogin';
@@ -44,9 +45,13 @@ const modalInfoForModalName: string => ?ModalInfo = name => {
   switch (name) {
     case 'login':
       return {
-        title: 'Login woot woot',
+        title: 'Login or Sign Up',
         footer: null,
-        content: <FacebookLogin />,
+        content: (
+          <Flex align="center" direction="column">
+            <FacebookLogin />
+          </Flex>
+        ),
       };
     default:
       return null;
@@ -63,6 +68,7 @@ const ModalPresenter = ({ location, history }: Props) => {
   const { title, footer, content } = modalInfo;
   return (
     <Modal
+      width={300}
       title={title}
       visible={true}
       footer={footer}

@@ -79,11 +79,9 @@ const Post = ({
         {noLinks ? (
           <Text>{comments.length} comments</Text>
         ) : (
-          <Link>
-            <RouterText id={id} to={'/post/' + id} size="medium">
-              {comments.length} comments
-            </RouterText>
-          </Link>
+          <RouterText id={id} to={'/post/' + id} size="medium">
+            {comments.length} comments
+          </RouterText>
         )}
         <Box>
           {tags.map(tag => {
