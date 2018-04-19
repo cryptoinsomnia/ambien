@@ -1,18 +1,18 @@
 // @flow
 import * as React from 'react';
-import {Row, Col} from 'antd';
+import { Row, Col } from 'antd';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import gql from 'graphql-tag';
 
-import {Box} from './Layout';
-import {Text} from './Text';
+import { Box } from './Layout';
+import { Text } from './Text';
 import Vote from './Vote';
 import UserAvatar from './UserAvatar';
 import CreateCommentOnComment from './CreateCommentOnComment';
 import Post from './Post';
-import {colors} from '../util/style';
+import { colors } from '../util/style';
 
-import {type CommentType, type SmallUser, type VoteType} from '../types/api';
+import { type CommentType, type SmallUser, type VoteType } from '../types/api';
 
 type Props = {|
   comment: CommentType,
@@ -21,12 +21,12 @@ type Props = {|
   votes: Array<VoteType>,
 |};
 
-const Comment = ({comment, createdAt, author, votes}: Props) => (
+const Comment = ({ comment, createdAt, author, votes }: Props) => (
   <React.Fragment>
     <Row
       type="flex"
       align="middle"
-      style={{backgroundColor: colors.superLightGrey}}
+      style={{ backgroundColor: colors.superLightGrey }}
     >
       <Col lg={1} xs={4}>
         <Row type="flex" align="middle" justify="center">
@@ -36,27 +36,28 @@ const Comment = ({comment, createdAt, author, votes}: Props) => (
       <Col lg={22} xs={10}>
         <Row type="flex" justify="space-between">
           <Col xs={14} lg={16}>
-            <Text>{comment.author.username}: {comment.content}</Text>
+            <Text>
+              {comment.author.username}: {comment.content}
+            </Text>
           </Col>
           <Col lg={8}>
             <Row type="flex" justify="end">
               <UserAvatar {...author} size="small">
                 <Box ml={1}>
                   <Text italic size="small">
-                    {`${distanceInWordsToNow (new Date (createdAt))} ago`}
+                    {`${distanceInWordsToNow(new Date(createdAt))} ago`}
                   </Text>
                 </Box>
               </UserAvatar>
             </Row>
           </Col>
         </Row>
-
       </Col>
     </Row>
     <Row
       type="flex"
       align="right"
-      style={{backgroundColor: colors.superLightGrey}}
+      style={{ backgroundColor: colors.superLightGrey }}
     >
       <Col lg={24} xs={14}>
         <CreateCommentOnComment
@@ -75,12 +76,17 @@ Comment.defaultProps = {
 Comment.fragments = {
   comment: gql`
     fragment CommentData on Comment {
+      id
       content
-      createdAt
       directParentType
-      post {
-        ...PostData
+      author {
+        username
+        karma
       }
+      threadedParentComment {
+        id
+      }
+      createdAt
     }
     ${Post.fragments.post}
   `,

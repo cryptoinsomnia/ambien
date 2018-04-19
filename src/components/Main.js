@@ -56,6 +56,15 @@ export const Feed = gql`
   query Feed($first: Int!, $orderBy: PostOrderByInput) {
     feed(orderBy: $orderBy, first: $first) {
       ...PostData
+      votes {
+        id
+        voter {
+          id
+        }
+      }
+      comments {
+        id
+      }
     }
   }
   ${Post.fragments.post}

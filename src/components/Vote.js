@@ -115,9 +115,6 @@ Vote.fragments = {
       id
       createdAt
       contentType
-      comment {
-        id
-      }
       voter {
         id
         name
