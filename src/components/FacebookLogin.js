@@ -40,8 +40,7 @@ const FacebookLoginButton = styled(LoginButton)`
   text-shadow: 0 -1px 0 #354c8c;
   &:before {
     border-right: #364e92 1px solid;
-    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png')
-      6px 6px no-repeat;
+    background: url('/images/icon_facebook.png') 6px 6px no-repeat;
   }
   &:hover {
     background-color: #5b7bd5;
