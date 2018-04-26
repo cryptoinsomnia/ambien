@@ -114,7 +114,7 @@ const Profile = ({user, posts, comments, votes, isLoading}: Props) => {
                   </MessageBox>
                 : <Fragment>
                     {comments.map ((comment, index) => (
-                      <Box key={comment.id} borderBottom py={2}>
+                      <Box key={index} borderBottom py={2}>
                         <Post rank={index + 1} {...comment.post} />
                       </Box>
                     ))}

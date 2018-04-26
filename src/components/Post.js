@@ -10,9 +10,9 @@ import {Text, RouterText} from './Text';
 import UserAvatar from './UserAvatar';
 import Vote from './Vote';
 import Link from './Link';
-import { idToDisplayName } from '../constants/tags';
-import { type PostType } from '../types/api';
-import { colors } from '../util/style';
+import {idToDisplayName} from '../constants/tags';
+import {type PostType} from '../types/api';
+import {colors} from '../util/style';
 
 // The props to a Post are everything in the FeedPost API object
 // and the ranking (order it appears in the list).
@@ -75,13 +75,11 @@ const Post = ({
       <Row type="flex" justify="space-between">
         {noLinks
           ? <Text>{comments.length} comments</Text>
-          : <Link>
-              <RouterText id={id} to={'/post/' + id} size="medium">
-                {comments.length} comments
-              </RouterText>
-            </Link>}
+          : <RouterText id={id} to={'/post/' + id} size="medium">
+              {comments.length} comments
+            </RouterText>}
         <Box>
-          {tags.map(tag => {
+          {tags.map (tag => {
             const displayName = idToDisplayName[tag];
             return displayName ? <Tag key={tag}>{displayName}</Tag> : null;
           })}

@@ -40,7 +40,7 @@ var getSortedCommentsToRender = function (comments) {
   var commentsToRender = [];
   var threadedLevelsStack = [];
   Tree.dfs (getTreeGraphOfComments (comments), function (node, par) {
-    if (node.threadedParentComment.length == 0) {
+    if (node.threadedParentComment.length === 0) {
       threadedLevelsStack.length = 0;
     } else if (
       threadedLevelsStack.includes (node.threadedParentComment[0].id)
